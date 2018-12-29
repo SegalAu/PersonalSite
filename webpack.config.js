@@ -14,12 +14,34 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
-      }
+      },
+      {
+        test: /\.(gif|png|jpe?g)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true, // webpack@1.x
+              disable: true, // webpack@2.x and newer
+            },
+          },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use: [{
+          loader: 'babel-loader'
+          }, {
+            loader: 'react-svg-loader'
+          }]
+      },
     ]
   },
   output: {
     filename: 'transformed.js',
     path: __dirname + '/build'
   },
+
   plugins: [HTMLWebpackPluginConfig]
 };

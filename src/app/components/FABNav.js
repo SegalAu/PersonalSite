@@ -1,5 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 /* Speed Dial Components */
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
@@ -12,24 +14,48 @@ import MenuIcon from '@material-ui/icons/Menu';
 import BuildIcon from '@material-ui/icons/Build';
 import WorkIcon from '@material-ui/icons/Work';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import ExploreIcon from '@material-ui/icons/Explore';
+import AppsIcon from '@material-ui/icons/Apps';
 
-const speedDialStyle = {
 
-}
 
 const actions = [
     {icon: <FaceIcon/>, name: "About"},
-    {icon: <BuildIcon/>, name: "Skills"},
     {icon: <WorkIcon/>, name: "Experience"},
+    {icon: <BuildIcon/>, name: "Projects"},
     {icon: <AssignmentIcon/>, name: "Resume"},
+    {icon: <AppsIcon/>, name: "Contact"},
 ];
+
+const styles = theme => ({
+  speedDialClass : {
+  },
+
+  button: {
+
+    "&:hover" : {
+      background: "white",
+      color: "#0DC4BE",
+    }
+  },
+
+  fab: {
+    padding: 0,
+    margin: 0,
+    background: "white",
+    "&:hover" : {
+      background: "white",
+    }
+  },
+
+});
 
 class FABNav extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       open: false,
-      direction: "up",
+      direction: "down",
     }
     this.handleClick = this.handleClick.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
@@ -60,11 +86,21 @@ class FABNav extends React.Component {
 
   }
 
+  testScroll(){
+    console.log(window.pageYOffset);
+  }
+
+
   render(){
 
-    const speedDialClassName = classNames(
-      this.props.SpeedDialStyle
-    );
+    let styles = {
+      speedDialIconStyle: {
+        color: "black",
+        backgroundColor: "white",
+      }
+    }
+
+    const {classes} = this.props;
 
 
     return(
@@ -72,8 +108,11 @@ class FABNav extends React.Component {
       <div>
         <SpeedDial
           ariaLabel="FABNav"
-          className = {speedDialClassName}
-          icon = {<MenuIcon/>}
+          classes = {{
+            fab: classes.fab,
+            root: classes.root,
+          }}
+          icon = {<SpeedDialIcon openIcon={<MenuIcon/>} style = {styles.speedDialIconStyle}/>}
           open = {this.state.open}
           onMouseEnter = {this.handleOpen}
           onMouseLeave = {this.handleClose}
@@ -85,12 +124,15 @@ class FABNav extends React.Component {
 
           // handle popup elements in speed dial
           {actions.map(action => (
-            <SpeedDialAction
-              key = {action.name}
-              icon = {action.icon}
-              tooltipTitle = {action.name}
-              onClick = {this.handleClick}
-            />
+              <SpeedDialAction
+                classes = {{
+                  button: classes.button,
+                }}
+                key = {action.name}
+                icon = {action.icon}
+                tooltipTitle = {action.name}
+                onClick = {this.testScroll}
+              />
           ))}
         </SpeedDial>
       </div>
@@ -99,4 +141,9 @@ class FABNav extends React.Component {
     );
   }
 }
-export default FABNav;
+
+FABNav.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default withStyles(styles)(FABNav);
