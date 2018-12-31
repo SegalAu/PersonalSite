@@ -114,9 +114,9 @@ class Experience extends React.Component {
       },
 
       titleTextBox: {
-
-        marginTop: 200,
-        width: this.state.width * 0.25,
+        marginTop: 0,
+        width: this.state.width * 0.45,
+        height: 600,
         backgroundColor: "black",
         opacity: 0.85,
         padding: 10,
