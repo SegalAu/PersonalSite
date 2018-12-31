@@ -21,9 +21,12 @@ import Typography from '@material-ui/core/Typography';
 
 /* Resources */
 import AEXImg from '../../resources/AEX.jpg';
+import officeIMG from '../../resources/officeIMG.png';
 
 import classnames from 'classnames';
 
+import { Parallax, Background } from 'react-parallax';
+import { Container, Row, Col } from 'react-grid-system';
 
 const styles = theme => ({
   expand: {
@@ -84,9 +87,15 @@ class Experience extends React.Component {
         width: "100%",
       },
       headerBar: {
-        backgroundColor: "black",
+        marginLeft: 20,
         color: "white",
       },
+
+      headerBar2: {
+        marginLeft: 30,
+        color: "white",
+      },
+
       CollapseElement: {
 
       },
@@ -94,74 +103,127 @@ class Experience extends React.Component {
         marginTop: 40,
 
       },
+
+      titleBox:{
+        height: 150,
+        marginBottom: 25,
+      },
+
+      divStyle: {
+        marginBottom: 40,
+      },
+
+      titleTextBox: {
+
+        marginTop: 200,
+        width: this.state.width * 0.25,
+        backgroundColor: "black",
+        opacity: 0.85,
+        padding: 10,
+      },
+
+      leftAlign: {
+        height: 600,
+        overflow: "hidden",
+
+      },
+
+      CardElementRightAlign: {
+        zIndex: 5,
+        marginTop: 0,
+        position: "absolute",
+        width: "100%",
+        backgroundColor:"black",
+        opacity: 0.85,
+      },
+
+      containerStyle: {
+        height: 600,
+        marginLeft: -20,
+      },
+
+
     }
 
     return(
       <div >
-        <Fade bottom>
+        <Fade>
 
-          <Typography variant="h2" gutterBottom>
-            Experience
-          </Typography>
 
-          <div>
+            <Typography variant="h1" gutterBottom>
+              Experience
+            </Typography>
+
+
+          <div style={stylesRender.divStyle}>
             <Divider/>
           </div>
 
+          <div style={stylesRender.leftAlign}>
+            <Parallax
+               blur={7}
+               bgImage={officeIMG}
+               bgImageAlt="the cat"
+               strength={200}>
 
-          <Card style = {stylesRender.CardElement}>
-            <CardActionArea>
-              <CardMedia
-                style={stylesRender.imgStyle}
-                image={AEXImg}
-                title="Agreement Express"
-              />
-              <CardContent style = {stylesRender.headerBar}>
-                <Typography gutterBottom variant="h5" component="h2"
-                            style = {stylesRender.headerBar}>
-                  Software Developer (Co-op) - Agreement Express
-                </Typography>
-                <Typography gutterBottom variant="subtitle1" component="h2"
-                            style = {stylesRender.headerBar}>
-                  January - August 2018 (8 month)
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Typography gutterBottom variant="h5" component="h2">
-                Responsibilities & Achievements
-              </Typography>
-              <IconButton
-                className={classnames(classes.expand, {
-                  [classes.expandOpen]: this.state.expanded,
-                })}
-                style = {stylesRender.dropDownBtn}
-                onClick={this.handleExpandClick}
-                aria-expanded={this.state.expanded}
-                aria-label="Show more">
-                <ExpandMoreIcon />
-              </IconButton>
-            </CardActions>
-            <Collapse
-                in={this.state.expanded}
-                timeout = "auto"
-                unmountOnExit
-                style = {stylesRender.CollapseElement}>
-              <CardContent>
-                <Typography variant="subtitle1" >
-                  <ul>
-                    <li>	Contributed in designing and implementing responsive web application tools platform for internal development and analyst team using React / Redux
-                    <br/> (enabled cross-platform compatibility and increased productivity by approximately 70%) </li>
-                    <li>	Collaborated and wrote software to exceed specific client requirements and establish data handling regulation </li>
-                    <li>	Conducted regular QA testing and bug-fixing using Jest / Mocha </li>
-                    <li>	Performed back-end integration and development using internal RESTful API (Java) </li>
-                    <li>	Enhanced front-end interaction and UI elements of internal development tools using React framework and third-party APIs such as Material UI </li>
-                    <li>	Worked with analysts in creating product demos to potential and existing clients </li>
-                  </ul>
-                </Typography>
-              </CardContent>
-            </Collapse>
-          </Card>
+               <Container style={stylesRender.containerStyle}>
+                <Row>
+                <Col xs={4} m={4}>
+                 <div style={stylesRender.titleBox}>
+                    <div style={stylesRender.titleTextBox}>
+                     <Typography gutterBottom variant="h4" component="h2"
+                                 style = {stylesRender.headerBar}>
+                       Agreement Express
+                     </Typography>
+                     <Typography gutterBottom variant="overline" component="h2"
+                                 style = {stylesRender.headerBar}>
+                       Software Developer (Co-op)
+                     </Typography>
+                     <Typography gutterBottom variant="subtitle1" component="h2"
+                                 style = {stylesRender.headerBar}>
+                       January - August 2018 (8 month)
+                     </Typography>
+
+
+
+                     <Typography gutterBottom variant="overline" component="h2"
+                                 style = {stylesRender.headerBar}>
+                       Responsibilities & Achievements
+                     </Typography>
+
+                     <Typography variant="subtitle1" style = {stylesRender.headerBar}>
+                       <ul>
+                         <li>	Contributed in designing and implementing responsive web application tools platform for internal development and analyst team using React / Redux
+                         <br/> (enabled cross-platform compatibility and increased productivity by approximately 70%) </li>
+                         <li>	Collaborated and wrote software to exceed specific client requirements and establish data handling regulation </li>
+                         <li>	Conducted regular QA testing and bug-fixing using Jest / Mocha </li>
+                         <li>	Performed back-end integration and development using internal RESTful API (Java) </li>
+                         <li>	Enhanced front-end interaction and UI elements of internal development tools using React framework and third-party APIs such as Material UI </li>
+                         <li>	Worked with analysts in creating product demos to potential and existing clients </li>
+                       </ul>
+                     </Typography>
+
+
+                    </div>
+                  </div>
+                </Col>
+                <Col xs={6} m={6}>
+
+               </Col>
+               </Row>
+               </Container>
+
+             </Parallax>
+
+
+
+           </div>
+
+
+
+
+
+
 
 
         </Fade>

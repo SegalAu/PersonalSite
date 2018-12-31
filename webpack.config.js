@@ -16,7 +16,7 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.(gif|png|jpe?g)$/i,
+        test: /\.(gif|png|jpg)$/i,
         use: [
           'file-loader',
           {
@@ -36,7 +36,22 @@ module.exports = {
             loader: 'react-svg-loader'
           }]
       },
-    ]
+      {
+         test: /\.mp4/,
+         use: {
+           loader: 'url-loader',
+           options: {
+             limit: 10000,
+             mimtetype: 'video/mp4',
+           }
+         }
+       },
+       {
+         test: /\.html$/,
+         use: 'html-loader?attrs[]=video:src'
+       }
+   ],
+
   },
   output: {
     filename: 'transformed.js',

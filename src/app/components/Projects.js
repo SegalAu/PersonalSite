@@ -20,7 +20,10 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Typography from '@material-ui/core/Typography';
 
 /* Resources */
-import RCHWayfinderIMG from '../../resources/AddEdge.gif';
+import RCHWayfinderIMG from '../../resources/RCHWayfinderDisplay.gif';
+import EncryptoBanner from '../../resources/encryptoLogoBanner.png';
+import EncryptoIMG from '../../resources/EncryptoTutorial.gif';
+import CodeIcon from '@material-ui/icons/Code';
 
 import classnames from 'classnames';
 
@@ -110,16 +113,25 @@ class Projects extends React.Component {
         height: 0.3 * this.state.height,
         width: "100%",
       },
-      headerBar: {
-        backgroundColor: "black",
+      RCHBar: {
+        backgroundColor: "white",
+      },
+      Take2Bar: {
+        backgroundColor: "green",
         color: "white",
       },
+      EncryptoBar: {
+        backgroundColor: "maroon",
+        color: "white",
+      },
+
       CollapseElement: {
 
       },
 
       CardElement: {
           marginTop: 40,
+          width: this.state.width*0.5
       },
 
       container: {
@@ -142,12 +154,27 @@ class Projects extends React.Component {
         height: "auto",
         flex: 1,
       },
+
+      projectButtonIcon: {
+        marginLeft: 10,
+      },
+
+      dividerStyle:{
+        marginTop: 20,
+        marginBottom: -20,
+      },
+
+      CardElementRightAlign: {
+        marginTop: 40,
+        width: this.state.width*0.5,
+        marginLeft: this.state.width*0.3,
+      },
     }
 
     return(
       <div style = {stylesRender.container} >
         <Fade duration={1500}>
-          <Typography variant="h2" gutterBottom>
+          <Typography variant="h1" gutterBottom>
             Projects
           </Typography>
 
@@ -157,48 +184,21 @@ class Projects extends React.Component {
 
         <Card style={stylesRender.CardElement}>
           <CardActionArea>
-            <CardMedia
-              style={stylesRender.imgStyle}
-              image={RCHWayfinderIMG}
-              title="RCHWayfinder"
-            />
-            <CardContent style = {stylesRender.headerBar}>
+
+            <CardContent style = {stylesRender.RCHBar}>
               <Typography gutterBottom variant="h5" component="h2"
-                          style = {stylesRender.headerBar}>
+                          style = {stylesRender.RCHBar}>
                 RCHWayfinder
               </Typography>
               <Typography gutterBottom variant="caption" component="h2"
-                          style = {stylesRender.headerBar}>
+                          style = {stylesRender.RCHBar}>
                 Administration Portal Graphical Interface & NoSQL Cloud Database
               </Typography>
               <Typography gutterBottom variant="overline" component="h2"
-                          style = {stylesRender.headerBar}>
+                          style = {stylesRender.RCHBar}>
                 Royal Columbian Hospital - BCIT Joint Student Project
               </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Typography gutterBottom variant="h5" component="h2">
-              Responsibilities & Achievements
-            </Typography>
-            <IconButton
-              className={classnames(classes.expand, {
-                [classes.expandOpen]: this.state.expanded1,
-              })}
-              style = {stylesRender.dropDownBtn}
-              onClick={this.handleExpandClick1}
-              aria-expanded={this.state.expanded1}
-              aria-label="Show more">
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
-          <Collapse
-              in={this.state.expanded1}
-              timeout = "auto"
-              unmountOnExit
-              style = {stylesRender.CollapseElement}>
-            <CardContent>
-              <Typography>
+              <Typography variant="subtitle1">
                 <ul>
                   <li>	Contributed in designing and implementing responsive web application tools platform for internal development and analyst team using React / Redux
                   <br/> (enabled cross-platform compatibility and increased productivity by approximately 70%) </li>
@@ -209,128 +209,104 @@ class Projects extends React.Component {
                   <li>	Worked with analysts in creating product demos to potential and existing clients </li>
                 </ul>
               </Typography>
+
+              <Button variant="outlined"
+
+               color="secondary" target = "_blank" href="https://bitbucket.org/group-24/">
+
+                Source Code
+                <CodeIcon style={stylesRender.projectButtonIcon}/>
+              </Button>
+
+
+
             </CardContent>
-          </Collapse>
+          </CardActionArea>
         </Card>
 
-        <Divider/>
+
+
+        <Card style={stylesRender.CardElementRightAlign}>
+          <CardActionArea>
+
+            <CardContent style = {stylesRender.headerBar}>
+              <Typography gutterBottom variant="h5" component="h2"
+                          style = {stylesRender.headerBar}>
+                Take 2 Foods
+              </Typography>
+              <Typography gutterBottom variant="caption" component="h2"
+                          style = {stylesRender.headerBar}>
+                Food Waste Management Mobile Web Application
+              </Typography>
+              <Typography gutterBottom variant="overline" component="h2"
+                          style = {stylesRender.headerBar}>
+                Metro Vancouver Project - Runner-Up Recipient
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <ul>
+                  <li>	Contributed in designing and implementing responsive web application tools platform for internal development and analyst team using React / Redux
+                  <br/> (enabled cross-platform compatibility and increased productivity by approximately 70%) </li>
+                  <li>	Collaborated and wrote software to exceed specific client requirements and establish data handling regulation </li>
+                  <li>	Conducted regular QA testing and bug-fixing using Jest / Mocha </li>
+                  <li>	Performed back-end integration and development using internal RESTful API (Java) </li>
+                  <li>	Enhanced front-end interaction and UI elements of internal development tools using React framework and third-party APIs such as Material UI </li>
+                  <li>	Worked with analysts in creating product demos to potential and existing clients </li>
+                </ul>
+              </Typography>
+
+              <Button variant="outlined"
+
+               color="secondary" target = "_blank" href="https://bitbucket.org/group-24/">
+
+                Source Code
+                <CodeIcon style={stylesRender.projectButtonIcon}/>
+              </Button>
+
+            </CardContent>
+          </CardActionArea>
+
+        </Card>
+
+
 
               <Card style={stylesRender.CardElement}>
                 <CardActionArea>
-                  <CardMedia
-                    style={stylesRender.imgStyle}
-                    image={RCHWayfinderIMG}
-                    title="RCHWayfinder"
-                  />
+
                   <CardContent style = {stylesRender.headerBar}>
                     <Typography gutterBottom variant="h5" component="h2"
                                 style = {stylesRender.headerBar}>
-                      RCHWayfinder
+                      Encrypto
                     </Typography>
                     <Typography gutterBottom variant="caption" component="h2"
                                 style = {stylesRender.headerBar}>
-                      Administration Portal Graphical Interface & NoSQL Cloud Database
+                      TEA Encryption Google Chrome Extension
                     </Typography>
                     <Typography gutterBottom variant="overline" component="h2"
                                 style = {stylesRender.headerBar}>
-                      Royal Columbian Hospital - BCIT Joint Student Project
+                      Personal Project
                     </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Responsibilities & Achievements
-                  </Typography>
-                  <IconButton
-                    className={classnames(classes.expand, {
-                      [classes.expandOpen]: this.state.expanded2,
-                    })}
-                    style = {stylesRender.dropDownBtn}
-                    onClick={this.handleExpandClick2}
-                    aria-expanded={this.state.expanded2}
-                    aria-label="Show more">
-                    <ExpandMoreIcon />
-                  </IconButton>
-                </CardActions>
-                <Collapse
-                    in={this.state.expanded2}
-                    timeout = "auto"
-                    unmountOnExit
-                    style = {stylesRender.CollapseElement}>
-                  <CardContent>
-                    <Typography>
+
+                    <Typography variant="subtitle1">
                       <ul>
-                        <li>	Contributed in designing and implementing responsive web application tools platform for internal development and analyst team using React / Redux
-                        <br/> (enabled cross-platform compatibility and increased productivity by approximately 70%) </li>
-                        <li>	Collaborated and wrote software to exceed specific client requirements and establish data handling regulation </li>
-                        <li>	Conducted regular QA testing and bug-fixing using Jest / Mocha </li>
-                        <li>	Performed back-end integration and development using internal RESTful API (Java) </li>
-                        <li>	Enhanced front-end interaction and UI elements of internal development tools using React framework and third-party APIs such as Material UI </li>
-                        <li>	Worked with analysts in creating product demos to potential and existing clients </li>
+                        <li>	Encryption application based on the Tiny Encryption Algorithm  </li>
+                        <li>	Follows a symmetric key encryption model and allows users to securely share sensitive information using a common key </li>
+                        <li>	Seamless integration into Chrome browser enables ease of use in social media and file transfer mediums  </li>
+                        <li>	Created using JavaScript/jQuery  </li>
                       </ul>
                     </Typography>
-                  </CardContent>
-                </Collapse>
-              </Card>
+                    <Button variant="outlined"
+                     color="secondary" target = "_blank" href="https://github.com/SegalAu/Encrypto">
+                      Source Code
+                      <CodeIcon style={stylesRender.projectButtonIcon}/>
+                    </Button>
 
-              <Divider/>
+                    <Divider style={stylesRender.dividerStyle}/>
 
-              <Card style={stylesRender.CardElement}>
-                <CardActionArea>
-                  <CardMedia
-                    style={stylesRender.imgStyle}
-                    image={RCHWayfinderIMG}
-                    title="RCHWayfinder"
-                  />
-                  <CardContent style = {stylesRender.headerBar}>
-                    <Typography gutterBottom variant="h5" component="h2"
-                                style = {stylesRender.headerBar}>
-                      RCHWayfinder
-                    </Typography>
-                    <Typography gutterBottom variant="caption" component="h2"
-                                style = {stylesRender.headerBar}>
-                      Administration Portal Graphical Interface & NoSQL Cloud Database
-                    </Typography>
-                    <Typography gutterBottom variant="overline" component="h2"
-                                style = {stylesRender.headerBar}>
-                      Royal Columbian Hospital - BCIT Joint Student Project
-                    </Typography>
                   </CardContent>
+
                 </CardActionArea>
-                <CardActions>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Responsibilities & Achievements
-                  </Typography>
-                  <IconButton
-                    className={classnames(classes.expand, {
-                      [classes.expandOpen]: this.state.expanded3,
-                    })}
-                    style = {stylesRender.dropDownBtn}
-                    onClick={this.handleExpandClick3}
-                    aria-expanded={this.state.expanded3}
-                    aria-label="Show more">
-                    <ExpandMoreIcon />
-                  </IconButton>
-                </CardActions>
-                <Collapse
-                    in={this.state.expanded3}
-                    timeout = "auto"
-                    unmountOnExit
-                    style = {stylesRender.CollapseElement}>
-                  <CardContent>
-                    <Typography>
-                      <ul>
-                        <li>	Contributed in designing and implementing responsive web application tools platform for internal development and analyst team using React / Redux
-                        <br/> (enabled cross-platform compatibility and increased productivity by approximately 70%) </li>
-                        <li>	Collaborated and wrote software to exceed specific client requirements and establish data handling regulation </li>
-                        <li>	Conducted regular QA testing and bug-fixing using Jest / Mocha </li>
-                        <li>	Performed back-end integration and development using internal RESTful API (Java) </li>
-                        <li>	Enhanced front-end interaction and UI elements of internal development tools using React framework and third-party APIs such as Material UI </li>
-                        <li>	Worked with analysts in creating product demos to potential and existing clients </li>
-                      </ul>
-                    </Typography>
-                  </CardContent>
-                </Collapse>
+
               </Card>
 
               </Fade>
