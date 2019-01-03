@@ -21,12 +21,19 @@ import Typography from '@material-ui/core/Typography';
 
 /* Resources */
 import AEXImg from '../../resources/AEX.jpg';
-import officeIMG from '../../resources/officeIMG.png';
+import officeIMG from '../../resources/officeBackground.png';
 
 import classnames from 'classnames';
 
 import { Parallax, Background } from 'react-parallax';
 import { Container, Row, Col } from 'react-grid-system';
+
+/* Anchor */
+import ScrollableAnchor from 'react-scrollable-anchor'
+import { configureAnchors } from 'react-scrollable-anchor'
+import { goToTop } from 'react-scrollable-anchor'
+import { goToAnchor } from 'react-scrollable-anchor'
+
 
 const styles = theme => ({
   expand: {
@@ -57,6 +64,17 @@ class Experience extends React.Component {
 
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.handleExpandClick = this.handleExpandClick.bind(this);
+
+    //refs
+    this.experienceRef = React.createRef();
+  }
+
+  componentDidUpdate(){
+      if(this.props.goToExperience){
+        this.props.setToExperienceFalse();
+        this.scrollExperience();
+
+      }
   }
 
   componentDidMount() {
@@ -78,8 +96,19 @@ class Experience extends React.Component {
     })
   }
 
+  scrollExperience(){
+    var element = document.getElementById("experience");
+
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: 'start',
+      inline: 'center',
+    });
+  }
+
   render(){
     const {classes} = this.props;
+    const { scroll } = this.state
 
     let stylesRender = {
       imgStyle: {
@@ -114,12 +143,15 @@ class Experience extends React.Component {
       },
 
       titleTextBox: {
-        marginTop: 0,
+
         width: this.state.width * 0.45,
+        minWidth: 700,
         height: 600,
         backgroundColor: "black",
         opacity: 0.85,
-        padding: 10,
+        paddingTop: 50,
+        paddingLeft: 10,
+        paddingRight: 10,
       },
 
       leftAlign: {
@@ -142,6 +174,10 @@ class Experience extends React.Component {
         marginLeft: -20,
       },
 
+      experienceHeading:{
+        paddingTop: 40,
+      },
+
 
     }
 
@@ -150,7 +186,7 @@ class Experience extends React.Component {
         <Fade>
 
 
-            <Typography variant="h1" gutterBottom>
+            <Typography variant="h1" gutterBottom id="experience" style={stylesRender.experienceHeading}>
               Experience
             </Typography>
 
@@ -160,13 +196,15 @@ class Experience extends React.Component {
           </div>
 
           <div style={stylesRender.leftAlign}>
+
+
             <Parallax
-               blur={7}
+               blur={0}
                bgImage={officeIMG}
                bgImageAlt="the cat"
-               strength={200}>
+               strength={150}>
 
-               <Container style={stylesRender.containerStyle}>
+               <Container style={stylesRender.containerStyle} ref={this.experienceRef} >
                 <Row>
                 <Col xs={4} m={4}>
                  <div style={stylesRender.titleBox}>

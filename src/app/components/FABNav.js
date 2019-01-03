@@ -17,6 +17,12 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import ExploreIcon from '@material-ui/icons/Explore';
 import AppsIcon from '@material-ui/icons/Apps';
 
+/* Anchor Scroll */
+import ScrollableAnchor from 'react-scrollable-anchor'
+import { configureAnchors } from 'react-scrollable-anchor'
+import { goToTop } from 'react-scrollable-anchor'
+import { goToAnchor } from 'react-scrollable-anchor'
+
 
 
 const actions = [
@@ -56,12 +62,40 @@ class FABNav extends React.Component {
     this.state = {
       open: false,
       direction: "down",
+      profile: false,
+      experience: false,
+      project: false,
     }
     this.handleClick = this.handleClick.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.goToProfile = this.goToProfile.bind(this);
+    this.goToExperience = this.goToExperience.bind(this);
+    this.goToProfile = this.goToProfile.bind(this);
+    this.goToProject = this.goToProject.bind(this);
   }
 
+  componentDidUpdate(){
+    if(this.state.experience){
+      this.props.scrollToExperience();
+      this.setState({
+        experience:false,
+      });
+    }
+    if(this.state.profile){
+      this.props.setToTop();
+      this.setState({
+        profile: false,
+      })
+    }
+    if(this.state.project){
+      this.props.setToProject();
+      this.setState({
+        project: false,
+      })
+    }
+
+  }
 
   handleClick(){
     //Flip to opposite of current state
@@ -88,6 +122,26 @@ class FABNav extends React.Component {
 
   testScroll(){
     console.log(window.pageYOffset);
+  }
+
+  goToProfile(){
+    console.log("reached going to profile!");
+    this.setState({
+      profile: true,
+    })
+  }
+
+  goToExperience(){
+    console.log("going to experience!");
+    this.setState({
+      experience: true,
+    })
+  }
+
+  goToProject(){
+    this.setState({
+      project: true,
+    });
   }
 
 
@@ -123,17 +177,46 @@ class FABNav extends React.Component {
         >
 
           // handle popup elements in speed dial
-          {actions.map(action => (
-              <SpeedDialAction
-                classes = {{
-                  button: classes.button,
-                }}
-                key = {action.name}
-                icon = {action.icon}
-                tooltipTitle = {action.name}
-                onClick = {this.testScroll}
-              />
-          ))}
+
+          <SpeedDialAction
+            classes = {{
+              button: classes.button,
+            }}
+            key = {actions[0].name}
+            icon = {actions[0].icon}
+            tooltipTitle = {actions[0].name}
+            onClick = {this.goToProfile}
+          />
+          <SpeedDialAction
+            classes = {{
+              button: classes.button,
+            }}
+            key = {actions[1].name}
+            icon = {actions[1].icon}
+            tooltipTitle = {actions[1].name}
+            onClick = {this.goToExperience}
+          />
+          <SpeedDialAction
+            classes = {{
+              button: classes.button,
+            }}
+            key = {actions[2].name}
+            icon = {actions[2].icon}
+            tooltipTitle = {actions[2].name}
+            onClick = {this.goToProject}
+          />
+          <SpeedDialAction
+            classes = {{
+              button: classes.button,
+            }}
+            key = {actions[3].name}
+            icon = {actions[3].icon}
+            tooltipTitle = {actions[3].name}
+            onClick = {actions[3].performAction}
+          />
+
+
+
         </SpeedDial>
       </div>
 

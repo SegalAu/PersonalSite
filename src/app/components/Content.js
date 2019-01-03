@@ -6,7 +6,8 @@ import Projects from './Projects';
 import Profile from './Profile';
 
 
-/* Resources */
+import { Scroller, scrollInitalState } from 'react-skroll'
+
 
 
 import Typography from '@material-ui/core/Typography';
@@ -27,20 +28,34 @@ class TitleBar extends React.Component {
       width: 0,
       revealProjects: false,
       revealExperience: false,
+      goBackToTop: this.props.goBackToTop,
+      scroll: scrollInitalState,
     }
 
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+
   }
 
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
     window.addEventListener('scroll', this.handleScroll);
+    this.props.onRef(this);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
+    this.props.onRef(undefined);
+  }
+
+  componentDidUpdate(){
+    if(this.props.goBackToTop){
+      console.log("Content sees BACK TO TOP");
+    }
+    if(this.props.goToProject){
+      console.log("content sees GO TO PROJECT");
+    }
   }
 
   updateWindowDimensions() {
@@ -64,11 +79,13 @@ class TitleBar extends React.Component {
   }
 
 
+
   render() {
     let styles = {
       title: {
         height: "auto",
         width: "100%",
+        overflow: "auto",
       },
 
       contentMiddle: {
@@ -89,47 +106,62 @@ class TitleBar extends React.Component {
       ContentDivStyle2:{
         width: "100%",
         position: 'relative',
-      }
+      },
+
+
 
     };
 
-    const videoOptions = {
-      src: "src/resources/websiteBackground.mp4",
-      autoPlay: true,
-      muted: true,
-      loop: true,
-    };
+    const { scroll } = this.state;
+
 
 
     return(
       <div>
+
+
+
         <div style={styles.title}>
 
-
-          <div  style={styles.ContentDivStyle2}>
-            <Fade bottom duration={1500}>
-              <About style = {styles.About}/>
-            </Fade>
-          </div>
-
-
-
-
-          <div style = {styles.ContentDivStyle} >
-            <Fade when={this.state.revealExperience} duration={2000}>
-              <Experience />
-            </Fade>
-          </div>
+          <section>
+            <div  style={styles.ContentDivStyle2}>
+              <Fade bottom duration={1500}>
+                <About style = {styles.About}
+                      goBackToTop={this.props.goBackToTop}
+                      setToTopFalse={this.props.setToTopFalse}
+                      />
+              </Fade>
+            </div>
+          </section>
 
 
 
 
+          <section>
+            <div style = {styles.ContentDivStyle} >
+              <Fade when={this.state.revealExperience} duration={2000}>
+                <Experience getChildRefs={this.props.getChildRefs}
+                            goToExperience={this.props.goToExperience}
+                            setToExperienceFalse={this.props.setToExperienceFalse}
+                            />
+              </Fade>
+            </div>
+          </section>
 
-          <div style = {styles.ContentDivStyle} >
-            <Fade when={this.state.revealProjects} duration={2000}>
-              <Projects />
-            </Fade>
-          </div>
+
+
+
+          <section>
+            <div style = {styles.ContentDivStyle} >
+              <Fade when={this.state.revealProjects} duration={2000}>
+                <Projects goToProject = {this.props.goToProject}
+                          setToProjectFalse = {this.props.setToProjectFalse}/>
+              </Fade>
+            </div>
+          </section>
+
+
+
 
 
 
@@ -138,6 +170,8 @@ class TitleBar extends React.Component {
 
 
         </div>
+
+
       </div>
     );
   }

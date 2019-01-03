@@ -71,6 +71,13 @@ class Projects extends React.Component {
     window.addEventListener('resize', this.updateWindowDimensions);
   }
 
+  componentDidUpdate(){
+    if(this.props.goToProject){
+      this.props.setToProjectFalse();
+      this.scrollToProject();
+    }
+  }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
   }
@@ -96,6 +103,15 @@ class Projects extends React.Component {
     this.setState({
         expanded3: !this.state.expanded3,
     })
+  }
+
+  scrollToProject(){
+    var element = document.getElementById("project");
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: 'start',
+      inline: 'center',
+    });
   }
 
   render(){
@@ -169,12 +185,17 @@ class Projects extends React.Component {
         width: this.state.width*0.5,
         marginLeft: this.state.width*0.3,
       },
+
+      projectHeading:{
+        paddingTop: 40,
+      },
     }
 
     return(
       <div style = {stylesRender.container} >
+
         <Fade duration={1500}>
-          <Typography variant="h1" gutterBottom>
+          <Typography variant="h1" gutterBottom id="project" style={stylesRender.projectHeading}>
             Projects
           </Typography>
 
