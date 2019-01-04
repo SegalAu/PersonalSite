@@ -118,17 +118,7 @@ class Projects extends React.Component {
     const {classes} = this.props;
 
     let stylesRender = {
-      cardStyle: {
-        height: "auto",
-        width: "100%",
-        display: "flex",
 
-      },
-
-      imgStyle: {
-        height: 0.3 * this.state.height,
-        width: "100%",
-      },
       RCHBar: {
         backgroundColor: "white",
       },
@@ -147,11 +137,12 @@ class Projects extends React.Component {
 
       CardElement: {
           marginTop: 40,
-          width: this.state.width*0.5
+          width: this.state.width*0.5,
       },
 
       container: {
         height: "auto",
+
       },
 
       row: {
@@ -183,7 +174,7 @@ class Projects extends React.Component {
       CardElementRightAlign: {
         marginTop: 40,
         width: this.state.width*0.5,
-        marginLeft: this.state.width*0.3,
+        marginLeft: this.state.width*0.2,
       },
 
       projectHeading:{
@@ -322,7 +313,6 @@ class Projects extends React.Component {
                       <CodeIcon style={stylesRender.projectButtonIcon}/>
                     </Button>
 
-                    <Divider style={stylesRender.dividerStyle}/>
 
                   </CardContent>
 

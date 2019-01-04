@@ -72,6 +72,7 @@ class App extends Component {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
     window.addEventListener('scroll', this.handleScroll);
+    
   }
 
   componentWillUnmount() {
@@ -212,13 +213,18 @@ class App extends Component {
           position: 'fixed',
           bottom: this.state.height * 0.02,
           right: this.state.width * 0.020,
-          zIndex: 5
+          zIndex: 5,
+          opacity: 1,
+          visibility: "visible",
+          transition: "opacity 500ms",
         },
       };
     } else {
       btnStyle = {
         BackToTop: {
-          display: "none",
+          visibility: "hidden",
+          opacity: 0,
+          transition: "opacity 500ms",
         },
       };
     }

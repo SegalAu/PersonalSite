@@ -23,10 +23,16 @@ import profile1 from '../../resources/profile1.png';
 import profile2 from '../../resources/profile2.png';
 import profile3 from '../../resources/profile3.png';
 import profileBackground from '../../resources/hkEdit3.png';
+import cycle1 from '../../resources/cycle1.png';
+import cycle2 from '../../resources/cycle2.png';
+import cycle3 from '../../resources/cycle3.png';
+import testgif from '../../resources/RCHWayfinderDisplay.gif';
+import rainBack from '../../resources/rainBackground.mp4';
 
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
+
 
 
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -63,12 +69,12 @@ import { goToTop } from 'react-scrollable-anchor'
 import { goToAnchor } from 'react-scrollable-anchor'
 
 
-var aboutText = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " +
-"At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, ";
+var aboutText = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " ;
+
 
 
 const images = [
-  profile1, profile2, profile3
+  cycle1, cycle2, cycle3
 ];
 
 const ContainerCar = styled.div`
@@ -89,6 +95,54 @@ const styles = theme => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
+
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+
+  title: {
+    fontSize: 14,
+  },
+
+  card:{
+    minWidth: 700,
+    display: "flex",
+  },
+
+  aboutHeader1:{
+      fontSize: 18,
+  },
+
+  spacing: {
+    marginBottom: 12,
+  },
+
+  collapseDetails:{
+    display: 'flex',
+    flexDirection: 'column',
+  },
+
+  collapseSize:{
+    maxHeight: 300,
+  },
+
+  content:{
+  },
+
+
+  carousel:{
+    marginRight:-50,
+    marginTop: -30,
+    marginBottom: -40,
+    paddingBottom: 0,
+    paddingRight: 0,
+
+
+
+  },
+
 
 });
 
@@ -123,6 +177,7 @@ class About extends React.Component {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
     window.addEventListener('scroll', this.handleScroll);
+
   }
 
   componentDidUpdate(){
@@ -160,6 +215,7 @@ class About extends React.Component {
   render(){
 
     const { classes } = this.props;
+    const bull = <span className={classes.bullet}>•</span>;
 
     let stylesRender = {
 
@@ -211,6 +267,8 @@ class About extends React.Component {
       carousel: {
         marginLeft: 0,
         width: 300,
+        height: 800,
+        borderRadius: 100,
       },
 
       imageStyle:{
@@ -236,7 +294,12 @@ class About extends React.Component {
         zDepthShadows: "none",
         border: "none",
         boxShadow: 'none',
+        maxHeight: 300,
+      },
 
+      collapseCardStyle:{
+        width: this.state.width*0.4,
+        height: "auto",
       },
 
       buttonStyle:{
@@ -338,38 +401,63 @@ class About extends React.Component {
 
                 </CardActions>
 
-                <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                  <div style = {stylesRender.profilePicture}>
-                    <Carousel defaultWait={2000} duration={1000} style={stylesRender.carousel}>
-                      <Fade>
-                        <div>
-                          <img src={images[0]} style={stylesRender.imageStyle}/>
-                        </div>
-                      </Fade>
-                      <Fade>
-                        <div>
-                          <img src={images[1]} style={stylesRender.imageStyle}/>
-                        </div>
-                      </Fade>
-                      <Fade>
-                        <div>
-                          <img src={images[2]} style={stylesRender.imageStyle}/>
-                        </div>
-                      </Fade>
-                    </Carousel>
-                  </div>
+                <Collapse in={this.state.expanded} timeout="auto"
+                          className={classes.collapseSize}
+                          unmountOnExit>
+                  <Card style={stylesRender.collapseCardStyle}
+                        className={classes.card}>
+                    <div style={stylesRender.collapseDetails}>
+                      <CardContent className={classes.content}>
+                        <Typography className={classes.aboutHeader1} color="textSecondary">
+                          Hello, World.
+                        </Typography>
+                        <Typography variant="h4" component="h2">
+                          see
+                          {bull}
+                          ghu
+                          {bull}
+                          all
+                        </Typography>
+                        <Typography variant="caption" className={classes.spacing}>
+                          Proper Noun
+                        </Typography>
 
-                  <div style={stylesRender.blackBox}>
-                    <Typography variant="subtitle1" gutterBottom style={stylesRender.whiteText}>
-                      {aboutText}
-                    </Typography>
-                  </div>
+                        <Typography variant="body2" gutterBottom>
+                          {aboutText}
+                        </Typography>
+                      </CardContent>
+                    </div>
+                    <CardContent className={classes.carousel}>
+                      <Carousel defaultWait={2000} duration={1000} style={stylesRender.carousel}>
+                        <Fade>
+                          <div>
+                            <img src={images[0]} style={stylesRender.imageStyle}/>
+                          </div>
+                        </Fade>
+                        <Fade>
+                          <div>
+                            <img src={images[1]} style={stylesRender.imageStyle}/>
+                          </div>
+                        </Fade>
+                        <Fade>
+                          <div>
+                            <img src={images[2]} style={stylesRender.imageStyle}/>
+                          </div>
+                        </Fade>
+                      </Carousel>
+                    </CardContent>
+
+
+
+                 </Card>
                 </Collapse>
               </Card>
 
 
 
           </div>
+
+
 
 
           <div style={stylesRender.centeredDiv}>

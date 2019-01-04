@@ -17,7 +17,11 @@ import Fade from 'react-reveal/Fade';
 
 import Divider from '@material-ui/core/Divider';
 
-
+/* Anchor Scroll */
+import ScrollableAnchor from 'react-scrollable-anchor'
+import { configureAnchors } from 'react-scrollable-anchor'
+import { goToTop } from 'react-scrollable-anchor'
+import { goToAnchor } from 'react-scrollable-anchor'
 
 
 class TitleBar extends React.Component {
@@ -41,7 +45,10 @@ class TitleBar extends React.Component {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
     window.addEventListener('scroll', this.handleScroll);
+    this.handleScroll();
     this.props.onRef(this);
+    console.log("running go to top");
+
   }
 
   componentWillUnmount() {
@@ -67,11 +74,17 @@ class TitleBar extends React.Component {
   }
 
   handleScroll(){
-    if(window.pageYOffset >= 650){
+    console.log("running handle scroll");
+    var y = window.scrollY;
+    console.log("y : " + y);
+    console.log("page y offset: " + window.pageYOffset);
+    if(window.pageYOffset >= 1200 || y >= 1200){
       this.setState({
         revealProjects: true,
       });
-    } else if(window.pageYOffset >=0){
+    }
+    if(window.pageYOffset >= 120 || y > 120){
+      console.log("setting experience to visible");
       this.setState({
         revealExperience: true,
       })
@@ -85,7 +98,7 @@ class TitleBar extends React.Component {
       title: {
         height: "auto",
         width: "100%",
-        overflow: "auto",
+        overflow: "hidden",
       },
 
       contentMiddle: {
@@ -138,7 +151,7 @@ class TitleBar extends React.Component {
 
 
           <section>
-            <div style = {styles.ContentDivStyle} >
+            <div style = {styles.ContentDivStyle} id="experienceContainer">
               <Fade when={this.state.revealExperience} duration={2000}>
                 <Experience getChildRefs={this.props.getChildRefs}
                             goToExperience={this.props.goToExperience}
