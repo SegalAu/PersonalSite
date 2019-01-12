@@ -106,15 +106,11 @@ class BackToTop extends React.Component {
 
 
   render(){
-
     const { classes } = this.props;
 
     let stylesRender = {
-
-
-
       bottomButtonStyle:{
-        color: "black",
+        color: "white",
         marginLeft: 14,
       },
 
@@ -128,11 +124,9 @@ class BackToTop extends React.Component {
       },
 
       experienceText:{
-        color: "black",
+        color: "white",
       },
-
     }
-
 
     return(
 
@@ -150,8 +144,6 @@ class BackToTop extends React.Component {
                 <ArrowUpwardIcon fontSize="large"/>
             </IconButton>
           </div>
-
-
       </div>
     );
   }

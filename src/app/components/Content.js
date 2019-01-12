@@ -47,8 +47,6 @@ class TitleBar extends React.Component {
     window.addEventListener('scroll', this.handleScroll);
     this.handleScroll();
     this.props.onRef(this);
-    console.log("running go to top");
-
   }
 
   componentWillUnmount() {
@@ -114,7 +112,9 @@ class TitleBar extends React.Component {
       ContentDivStyle : {
         width: "100%",
         position: 'relative',
-        paddingTop: this.state.height * 0.15,
+        paddingTop: this.state.height * 0.1,
+        paddingBottom: 0,
+        marginBottom: 0,
       },
       ContentDivStyle2:{
         width: "100%",
@@ -177,8 +177,6 @@ class TitleBar extends React.Component {
 
 
 
-
-          <br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 

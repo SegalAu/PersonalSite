@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Fade from 'react-reveal/Fade';
+import Zoom from 'react-reveal/Zoom';
 import Divider from '@material-ui/core/Divider';
 /* Card Material UI */
 import Card from '@material-ui/core/Card';
@@ -136,8 +137,10 @@ class Projects extends React.Component {
       },
 
       CardElement: {
+          marginLeft: this.state.width*0.05,
           marginTop: 40,
           width: this.state.width*0.5,
+          minWidth: 700,
       },
 
       container: {
@@ -174,12 +177,23 @@ class Projects extends React.Component {
       CardElementRightAlign: {
         marginTop: 40,
         width: this.state.width*0.5,
+        minWidth: 700,
         marginLeft: this.state.width*0.2,
       },
 
       projectHeading:{
         paddingTop: 40,
+        color:"white",
       },
+
+      whiteText:{
+        color: "white",
+      },
+
+      whiteBackground:{
+          backgroundColor: "white",
+      },
+
     }
 
     return(
@@ -190,8 +204,9 @@ class Projects extends React.Component {
             Projects
           </Typography>
 
-
-        <Divider/>
+        <Zoom duration={5000}>
+          <Divider style={stylesRender.whiteBackground}/>
+        </Zoom>
 
 
         <Card style={stylesRender.CardElement}>

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Fade from 'react-reveal/Fade';
+import Zoom from 'react-reveal/Zoom';
 import Divider from '@material-ui/core/Divider';
 /* Card Material UI */
 import Card from '@material-ui/core/Card';
@@ -176,8 +177,16 @@ class Experience extends React.Component {
 
       experienceHeading:{
         paddingTop: 40,
+        color:"white",
       },
 
+      whiteText:{
+        color: "white",
+      },
+
+      whiteBackground:{
+          backgroundColor: "white",
+      },
 
     }
 
@@ -191,9 +200,11 @@ class Experience extends React.Component {
             </Typography>
 
 
-          <div style={stylesRender.divStyle}>
-            <Divider/>
-          </div>
+          <Zoom duration={5000}>
+            <div style={stylesRender.divStyle}>
+              <Divider style={stylesRender.whiteBackground}/>
+            </div>
+          </Zoom>
 
           <div style={stylesRender.leftAlign}>
 

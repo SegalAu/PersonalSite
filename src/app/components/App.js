@@ -16,6 +16,7 @@ import { Scroller, scrollInitalState } from 'react-skroll'
 
 /* Resources */
 import backgroundIMG from '../../resources/street.jpg';
+import backgroundIMG2 from '../../resources/backgroundImage2.jpg';
 import Cover from 'react-video-cover';
 import RainVid from '../../resources/rainBackground.mp4';
 
@@ -72,7 +73,7 @@ class App extends Component {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
     window.addEventListener('scroll', this.handleScroll);
-    
+
   }
 
   componentWillUnmount() {
@@ -189,11 +190,8 @@ class App extends Component {
       },
 
       backgroundImg:{
-        width: this.state.width,
-        height: this.state.height,
-        marginLeft:-8,
-        marginTop:-8,
-        overflow:"hidden",
+        overflow: "hidden",
+        filter: "blur(10px)",
       },
 
       backgroundDiv:{
@@ -201,6 +199,18 @@ class App extends Component {
         padding: 0,
       },
 
+      backGroundContainer: {
+        width: "100%",
+        height: 3500,
+        overflowX: "hidden",
+        overflowY: "visible",
+        marginLeft: 0,
+        paddingLeft: 0,
+        background: `url(${backgroundIMG2})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        filter: "blur(10px)",
+      },
 
 
     }
@@ -229,8 +239,6 @@ class App extends Component {
       };
     }
 
-
-
     const videoOptions = {
       src: "src/resources/websiteBackground.mp4",
       autoPlay: true,
@@ -240,13 +248,12 @@ class App extends Component {
 
     const { scroll } = this.state;
 
-
-
     return(
 
         <div >
+            <div style={styles.backGroundContainer}>
 
-            <img src={backgroundIMG} style={styles.backgroundImg}/>
+            </div>
 
             <div style = {styles.innerContainer}>
 

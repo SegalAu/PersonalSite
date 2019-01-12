@@ -205,15 +205,7 @@ class FABNav extends React.Component {
             tooltipTitle = {actions[2].name}
             onClick = {this.goToProject}
           />
-          <SpeedDialAction
-            classes = {{
-              button: classes.button,
-            }}
-            key = {actions[3].name}
-            icon = {actions[3].icon}
-            tooltipTitle = {actions[3].name}
-            onClick = {actions[3].performAction}
-          />
+  
 
 
 

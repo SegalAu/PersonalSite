@@ -1,8 +1,22 @@
-import React from 'react';
+  import React from 'react';
 import PropTypes from 'prop-types';
 import Fade from 'react-reveal/Fade';
 import Zoom from 'react-reveal/Zoom';
+/* Material UI Mui Theme Override */
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import Scrollbar from 'react-smooth-scrollbar';
+/* React Typing Animation */
+import Typing from 'react-typing-animation';
+/* Button Linking */
+import { Link } from 'react-router-dom'
+/* Resume PDF */
+import resumePDF from '../../resources/Resume_SegalAu_Final.pdf';
+/* React PDF */
+import { Document, Page } from 'react-pdf';
+/* React DOM */
+import ReactDOM from 'react-dom';
+/* Typed js */
+import Typed from 'typed.js';
 /*React Grid system*/
 import { Container, Row, Col } from 'react-grid-system';
 /*Material UI core*/
@@ -11,8 +25,6 @@ import Typography from '@material-ui/core/Typography';
 
 import TextLoop from "react-text-loop";
 import scrollToComponent from 'react-scroll-to-component';
-
-
 import CrossfadeImage from 'react-crossfade-image';
 import makeCarousel from 'react-reveal/makeCarousel';
 import Slide from 'react-reveal/Slide';
@@ -28,21 +40,18 @@ import cycle2 from '../../resources/cycle2.png';
 import cycle3 from '../../resources/cycle3.png';
 import testgif from '../../resources/RCHWayfinderDisplay.gif';
 import rainBack from '../../resources/rainBackground.mp4';
-
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
-
-
-
+import FolderIcon from '@material-ui/icons/FolderOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import AccountBoxIcon from '@material-ui/icons/faceOutlined';
 
 /* Buttons */
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-
+/* Parallax */
 import { Parallax, Background } from 'react-parallax';
 
 /* Card Material UI */
@@ -58,6 +67,9 @@ import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import classnames from 'classnames';
@@ -72,7 +84,6 @@ import { goToAnchor } from 'react-scrollable-anchor'
 var aboutText = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " ;
 
 
-
 const images = [
   cycle1, cycle2, cycle3
 ];
@@ -84,65 +95,74 @@ const ContainerCar = styled.div`
   height: 400px;
 `;
 
+const theme = createMuiTheme({
+  overrides: {
+    MuiCard: { // Name of the component ⚛️ / style sheet
+      root: {
+        paddingTop: 0,
+        marginTop: 0,
+      },
+    },
+  },
+});
+
 const styles = theme => ({
 
   expand: {
     transform: 'rotate(0deg)',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
+      duration: 500,
     }),
   },
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
     transform: 'scale(0.8)',
   },
-
   title: {
     fontSize: 14,
   },
-
   card:{
     minWidth: 700,
     display: "flex",
-  },
+    backgroundColor: "rgba(255,255,255, 0.85)",
+    paddingBottom: 10,
 
+  },
   aboutHeader1:{
       fontSize: 18,
   },
-
+  aboutHeader2:{
+  },
+  aboutHeader3:{
+  },
   spacing: {
     marginBottom: 12,
   },
-
   collapseDetails:{
     display: 'flex',
     flexDirection: 'column',
   },
-
   collapseSize:{
     maxHeight: 300,
   },
-
   content:{
   },
-
-
+  contactContent:{
+    backgroundColor: "transparent",
+  },
   carousel:{
     marginRight:-50,
     marginTop: -30,
     marginBottom: -40,
     paddingBottom: 0,
     paddingRight: 0,
-
-
-
   },
-
+  root:{
+  },
 
 });
 
@@ -163,10 +183,17 @@ class About extends React.Component {
       width: 0,
       imageIndex: 0,
       expanded: false,
+      expanded2: false,
+      numPages: 1,
+      pageNumber: 1,
+      resumeExpand: false,
+      displayScrollMore: true,
     }
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.handleExpandClick = this.handleExpandClick.bind(this);
-
+    this.handleExpandClick2 = this.handleExpandClick2.bind(this);
+    this.expandResume = this.expandResume.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentWillMount(){
@@ -177,7 +204,7 @@ class About extends React.Component {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
     window.addEventListener('scroll', this.handleScroll);
-
+    this.handleScroll();
   }
 
   componentDidUpdate(){
@@ -190,6 +217,7 @@ class About extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
+
   }
 
   updateWindowDimensions() {
@@ -202,6 +230,22 @@ class About extends React.Component {
     });
   }
 
+  handleExpandClick2(){
+    this.setState({
+        expanded2: !this.state.expanded2,
+    });
+  }
+
+  handleScroll(){
+    console.log("running handle scroll");
+    var y = window.scrollY;
+    if(y>0){
+      this.setState({
+        displayScrollMore : false
+      });
+    }
+  }
+
   ScrollToTop(){
     var element = document.getElementById("about");
     element.scrollIntoView({
@@ -211,15 +255,20 @@ class About extends React.Component {
     });
   }
 
+  expandResume(){
+    this.setState({
+      resumeExpand: !this.state.resumeExpand,
+    });
+  }
+
 
   render(){
 
     const { classes } = this.props;
     const bull = <span className={classes.bullet}>•</span>;
+    const { pageNumber, numPages } = this.state;
 
     let stylesRender = {
-
-
       profilePicture: {
         marginTop: 15,
         marginLeft: 40,
@@ -247,21 +296,17 @@ class About extends React.Component {
         height: 400,
       },
 
-
       whiteText:{
         color: "white",
       },
 
-      whiteBackground:{
-          backgroundColor: "white",
+      whiteTextPadded: {
+        color: "white",
+        padding: 10,
       },
 
-      profileContainer: {
-        marginTop: 0,
-        overflow: "hidden",
-        width: this.state.width*0.8,
-        minWidth: 800,
-        height: 350,
+      whiteBackground:{
+          backgroundColor: "white",
       },
 
       carousel: {
@@ -294,12 +339,15 @@ class About extends React.Component {
         zDepthShadows: "none",
         border: "none",
         boxShadow: 'none',
+        overflow: "hidden",
         maxHeight: 300,
+
       },
 
       collapseCardStyle:{
         width: this.state.width*0.4,
         height: "auto",
+        marginLeft: 20,
       },
 
       buttonStyle:{
@@ -312,7 +360,7 @@ class About extends React.Component {
 
       centeredDiv:{
         position: "absolute",
-        marginLeft: this.state.width*0.8,
+        color: "white",
         bottom: 0,
 
       },
@@ -323,17 +371,58 @@ class About extends React.Component {
 
       experienceText:{
         color: "white",
+      },
 
+      resumeDiv: {
+        marginLeft: 15,
+        marginTop: 20,
+        paddingBottom: 8,
+      },
+
+      scrollForMoreDiv: {
+        marginLeft: this.state.width*0.37,
+        marginTop: 350,
+      },
+
+      profileContainer: {
+        marginTop: 0,
+        overflow: "hidden",
+        width: this.state.width*0.8,
+        minWidth: 800,
+        height: 650,
+      },
+
+      listItemEl: {
+        width: 180,
+      },
+
+      contactContentStyle:{
+        overflow: "hidden",
+        marginLeft: 40,
+      },
+
+    };
+
+    let scrollMoreBtnStyle;
+    let opacityScrollMore = (1-(window.scrollY/100));
+
+    if(this.state.displayScrollMore){
+      console.log("DISPLAY SCROLL MORE");
+      scrollMoreBtnStyle={
+        btnStyle: {
+          color: "white",
+          zIndex: 5,
+        },
+      };
+    }else{
+      scrollMoreBtnStyle={
+        btnStyle: {
+          color:"white",
+          opacity: opacityScrollMore,
+          zIndex: 5,
+        },
       }
-
     }
-
-
-
-
-
-
-
 
     return(
       <div style={stylesRender.allElements}>
@@ -382,8 +471,21 @@ class About extends React.Component {
 
           <div style={stylesRender.profileContainer}>
 
-              <Card style={stylesRender.cardStyle}>
+              <div style={stylesRender.resumeDiv}>
+                <Typography variant="overline" style={stylesRender.whiteText}>
+                  Resume
+                  <IconButton
+                    href="./src/resources/Resume_SegalAu_Final.pdf"
+                    target="_blank"
+                    aria-expanded={this.state.expanded}
+                    aria-label="Show more"
+                    style={stylesRender.buttonStyle}>
+                      <FolderIcon variant="outlined"/>
+                  </IconButton>
+                </Typography>
+              </div>
 
+              <Card style={stylesRender.cardStyle}>
                 <CardActions>
                   <Typography variant="overline" style={stylesRender.whiteText}>
                     About </Typography>
@@ -395,28 +497,22 @@ class About extends React.Component {
                     aria-expanded={this.state.expanded}
                     aria-label="Show more"
                     style={stylesRender.buttonStyle}>
-
                       <ExpandMoreIcon />
                   </IconButton>
-
                 </CardActions>
 
-                <Collapse in={this.state.expanded} timeout="auto"
+                <Collapse in={this.state.expanded} timeout={500}
                           className={classes.collapseSize}
                           unmountOnExit>
                   <Card style={stylesRender.collapseCardStyle}
                         className={classes.card}>
                     <div style={stylesRender.collapseDetails}>
                       <CardContent className={classes.content}>
-                        <Typography className={classes.aboutHeader1} color="textSecondary">
+                        <Typography className={classes.aboutHeader1} color="white">
                           Hello, World.
                         </Typography>
-                        <Typography variant="h4" component="h2">
-                          see
-                          {bull}
-                          ghu
-                          {bull}
-                          all
+                        <Typography className={classes.aboutHeader2} variant="h4" component="h2">
+                          see{bull}ghu{bull}all
                         </Typography>
                         <Typography variant="caption" className={classes.spacing}>
                           Proper Noun
@@ -446,30 +542,53 @@ class About extends React.Component {
                         </Fade>
                       </Carousel>
                     </CardContent>
-
-
-
-                 </Card>
+                  </Card>
                 </Collapse>
               </Card>
 
+              <Card style={stylesRender.cardStyle}>
 
+                <CardActions>
+                  <Typography variant="overline" style={stylesRender.whiteText}>
+                    Contact </Typography>
+                  <IconButton
+                    className={classnames(classes.expand, {
+                      [classes.expandOpen]: this.state.expanded2,},
+                      classes.root
+                    )}
+                    onClick={this.handleExpandClick2}
+                    aria-expanded={this.state.expanded2}
+                    aria-label="Show more"
+                    style={stylesRender.buttonStyle}>
+                      <ExpandMoreIcon />
+                  </IconButton>
 
-          </div>
+                </CardActions>
 
+                <Collapse in={this.state.expanded2} timeout={500}
+                          className={classes.collapseSize}
+                          unmountOnExit>
+                  <div style={stylesRender.contactContentStyle}>
+                    <Typography variant="button" style={stylesRender.whiteTextPadded}>
+                      GITHUB </Typography>
+                    <Typography variant="button" style={stylesRender.whiteTextPadded}>
+                      BITBUCKET </Typography>
+                    <Typography variant="button" style={stylesRender.whiteTextPadded}>
+                      LINKEDIN </Typography>
+                  </div>
 
+                </Collapse>
+              </Card>
 
+              <div style={stylesRender.scrollForMoreDiv}>
+               <Fade duration={8000}>
+                <Typography variant="overline" style={scrollMoreBtnStyle.btnStyle}>
+                  Scroll For More
+                </Typography>
+               </Fade>
 
-          <div style={stylesRender.centeredDiv}>
-            <Typography variant="button" gutterBottom style={stylesRender.experienceText}>
-              Show me where you worked
-            </Typography>
-            <IconButton
-              onClick={this.goToExperience}
-              aria-label="Show more"
-              style={stylesRender.bottomButtonStyle}>
-                <ExpandMoreIcon fontSize="large"/>
-            </IconButton>
+              </div>
+
           </div>
         </Fade>
 
@@ -478,8 +597,8 @@ class About extends React.Component {
   }
 }
 
+
 About.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
 export default withStyles(styles)(About);
