@@ -178,7 +178,7 @@ class Projects extends React.Component {
         marginTop: 40,
         width: this.state.width*0.5,
         minWidth: 700,
-        marginLeft: this.state.width*0.2,
+        marginLeft: this.state.width*0.1,
       },
 
       projectHeading:{
@@ -191,7 +191,12 @@ class Projects extends React.Component {
       },
 
       whiteBackground:{
-          backgroundColor: "white",
+        backgroundColor: "white",
+      },
+
+      divStyle:{
+        backgroundColor: "white",
+        width: this.state.width*0.8,
       },
 
     }
@@ -205,7 +210,7 @@ class Projects extends React.Component {
           </Typography>
 
         <Zoom duration={5000}>
-          <Divider style={stylesRender.whiteBackground}/>
+          <Divider style={stylesRender.divStyle}/>
         </Zoom>
 
 
@@ -284,7 +289,7 @@ class Projects extends React.Component {
 
               <Button variant="outlined"
 
-               color="secondary" target = "_blank" href="https://bitbucket.org/group-24/">
+               color="secondary" target = "_blank" href="https://github.com/Flinze/take2">
 
                 Source Code
                 <CodeIcon style={stylesRender.projectButtonIcon}/>

@@ -46,6 +46,7 @@ import SendIcon from '@material-ui/icons/Send';
 import FolderIcon from '@material-ui/icons/FolderOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountBoxIcon from '@material-ui/icons/faceOutlined';
+import CodeIcon from '@material-ui/icons/Code'
 
 /* Buttons */
 import Button from '@material-ui/core/Button';
@@ -72,6 +73,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
 import classnames from 'classnames';
 
 /*Anchors */
@@ -81,7 +83,9 @@ import { goToTop } from 'react-scrollable-anchor'
 import { goToAnchor } from 'react-scrollable-anchor'
 
 
-var aboutText = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. " ;
+var aboutText = "An energetic and focused individual with a drive for the betterment of people and technology. " +
+"Often found snowboarding in the wild or improving his mediocre skills in Super Smash Bros, this unique Homo Sapien has limited " +
+"cooking ability but an exceptionally large appetite.                            Weaknesses include: Spicy food, horror movies, and heights";
 
 
 const images = [
@@ -147,7 +151,7 @@ const styles = theme => ({
     flexDirection: 'column',
   },
   collapseSize:{
-    maxHeight: 300,
+    maxHeight: 1000,
   },
   content:{
   },
@@ -163,6 +167,22 @@ const styles = theme => ({
   },
   root:{
   },
+  gitButton:{
+    color: "purple",
+  },
+  bitButton:{
+    color: "blue",
+  },
+  linkedButton:{
+    color:"blue",
+  },
+
+  contactBtnContainer: {
+    display: "flex",
+    flexDirection: "column",
+    width: "30%",
+  },
+
 
 });
 
@@ -341,7 +361,15 @@ class About extends React.Component {
         boxShadow: 'none',
         overflow: "hidden",
         maxHeight: 300,
+      },
 
+      cardStyle2:{
+        backgroundColor: "transparent",
+        zDepthShadows: "none",
+        border: "none",
+        boxShadow: 'none',
+        overflow: "hidden",
+        maxHeight: 600,
       },
 
       collapseCardStyle:{
@@ -424,6 +452,50 @@ class About extends React.Component {
       }
     }
 
+    let textLoopDisplay;
+    navigator.sayswho= (function(){
+      var ua= navigator.userAgent, tem,
+      M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+      if(/trident/i.test(M[1])){
+          tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+          return 'IE '+(tem[1] || '');
+      }
+      if(M[1]=== 'Chrome'){
+          tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
+          if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
+      }
+      M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+      if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+      return M.join(' ');
+    })();
+
+    if(navigator.sayswho.toString().includes("Edge")){
+      console.log("THIS SHIT IS EDGE");
+    } else {
+      console.log("NOT EDGE");
+      textLoopDisplay = (
+        <Fade bottom duration={1500}>
+          <Typography variant="h2" gutterBottom style={stylesRender.whiteText}>
+          <TextLoop
+              interval={2000}
+              springConfig={{ stiffness: 190, damping: 14 }}>
+
+              <span>Software Developer </span>
+
+              <span>Recovering Coffee Addict </span>
+
+              <span>Mediocre Gamer </span>
+
+              <span>Snowboarding Fanatic </span>
+
+              <span>Master Chef </span>
+
+          </TextLoop>
+        </Typography>
+      </Fade>
+      );
+    }
+
     return(
       <div style={stylesRender.allElements}>
 
@@ -441,25 +513,10 @@ class About extends React.Component {
 
         </Fade>
 
-        <Fade bottom duration={1500}>
-          <Typography variant="h2" gutterBottom style={stylesRender.whiteText}>
-            <TextLoop
-                interval={2000}
-                springConfig={{ stiffness: 190, damping: 14 }}>
+        {textLoopDisplay}
 
-                <span>Software Developer </span>
 
-                <span>Recovering Coffee Addict </span>
 
-                <span>Mediocre Gamer </span>
-
-                <span>Snowboarding Fanatic </span>
-
-                <span>Master Chef </span>
-
-            </TextLoop>{" "}
-          </Typography>
-        </Fade>
 
         <Zoom duration={5000}>
           <Divider style={stylesRender.whiteBackground}/>
@@ -475,7 +532,7 @@ class About extends React.Component {
                 <Typography variant="overline" style={stylesRender.whiteText}>
                   Resume
                   <IconButton
-                    href="./src/resources/Resume_SegalAu_Final.pdf"
+                    href="./src/resources/Resume_SegalAu_Version_Final.pdf"
                     target="_blank"
                     aria-expanded={this.state.expanded}
                     aria-label="Show more"
@@ -518,7 +575,7 @@ class About extends React.Component {
                           Proper Noun
                         </Typography>
 
-                        <Typography variant="body2" gutterBottom>
+                        <Typography variant="caption" align="justify" gutterBottom>
                           {aboutText}
                         </Typography>
                       </CardContent>
@@ -546,7 +603,7 @@ class About extends React.Component {
                 </Collapse>
               </Card>
 
-              <Card style={stylesRender.cardStyle}>
+              <Card style={stylesRender.cardStyle2}>
 
                 <CardActions>
                   <Typography variant="overline" style={stylesRender.whiteText}>
@@ -568,13 +625,49 @@ class About extends React.Component {
                 <Collapse in={this.state.expanded2} timeout={500}
                           className={classes.collapseSize}
                           unmountOnExit>
-                  <div style={stylesRender.contactContentStyle}>
-                    <Typography variant="button" style={stylesRender.whiteTextPadded}>
-                      GITHUB </Typography>
-                    <Typography variant="button" style={stylesRender.whiteTextPadded}>
-                      BITBUCKET </Typography>
-                    <Typography variant="button" style={stylesRender.whiteTextPadded}>
-                      LINKEDIN </Typography>
+                  <div style={stylesRender.contactContentStyle} className={classes.contactBtnContainer}>
+                      <Button variant="outlined"
+                              color="primary"
+                              href="https://github.com/segalau"
+                              target="_blank"
+                              className={classes.gitButton}>
+                        <Typography variant="button" style={stylesRender.whiteTextPadded}>
+                          GITHUB </Typography>
+                      </Button>
+                      <Button variant="outlined"
+                              color="primary"
+                              href="https://bitbucket.org/segal-au/"
+                              target="_blank"
+                              className={classes.bitButton}>
+                        <Typography variant="button" style={stylesRender.whiteTextPadded} >
+                          BITBUCKET </Typography>
+                      </Button>
+                      <Button variant="outlined"
+                              color="primary"
+                              href="https://ca.linkedin.com/in/segalau"
+                              target="_blank"
+                              className={classes.linkedButton}>
+                        <Typography variant="button" style={stylesRender.whiteTextPadded}>
+                          LINKEDIN </Typography>
+                      </Button>
+                      <Button>
+                        <Typography variant="button" style={stylesRender.whiteTextPadded}>
+                          au.segal@gmail.com  |  778-302-6170 </Typography>
+                      </Button>
+
+                      <Button variant="outlined"
+                              color="primary"
+                              href="index2.html"
+                              target="_blank"
+                              className={classes.bitButton}>
+                        <Typography variant="button" style={stylesRender.whiteTextPadded} >
+                          COURSES </Typography>
+                      </Button>
+
+
+
+
+
                   </div>
 
                 </Collapse>
@@ -585,6 +678,7 @@ class About extends React.Component {
                 <Typography variant="overline" style={scrollMoreBtnStyle.btnStyle}>
                   Scroll For More
                 </Typography>
+
                </Fade>
 
               </div>

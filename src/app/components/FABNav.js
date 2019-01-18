@@ -38,19 +38,23 @@ const styles = theme => ({
   },
 
   button: {
-
+    background: "transparent",
+    color: "white",
     "&:hover" : {
-      background: "white",
-      color: "#0DC4BE",
+      background: "transparent",
+      color: "#3f51b5",
     }
   },
 
   fab: {
     padding: 0,
     margin: 0,
-    background: "white",
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderColor: "white",
+    background: "transparent",
     "&:hover" : {
-      background: "white",
+      background: "transparent",
     }
   },
 
@@ -149,8 +153,8 @@ class FABNav extends React.Component {
 
     let styles = {
       speedDialIconStyle: {
-        color: "black",
-        backgroundColor: "white",
+        color: "white",
+        backgroundColor: "transparent",
       }
     }
 
@@ -205,7 +209,7 @@ class FABNav extends React.Component {
             tooltipTitle = {actions[2].name}
             onClick = {this.goToProject}
           />
-  
+
 
 
 

@@ -141,6 +141,7 @@ class Experience extends React.Component {
 
       divStyle: {
         marginBottom: 40,
+        width: this.state.width*0.8,
       },
 
       titleTextBox: {
@@ -158,6 +159,7 @@ class Experience extends React.Component {
       leftAlign: {
         height: 600,
         overflow: "hidden",
+        width: this.state.width*0.8,
 
       },
 

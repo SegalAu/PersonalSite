@@ -13,6 +13,7 @@ import { Scroller, scrollInitalState } from 'react-skroll'
 import Typography from '@material-ui/core/Typography';
 import TextLoop from "react-text-loop";
 import Fade from 'react-reveal/Fade';
+import Zoom from 'react-reveal/Zoom';
 
 
 import Divider from '@material-ui/core/Divider';
@@ -22,6 +23,13 @@ import ScrollableAnchor from 'react-scrollable-anchor'
 import { configureAnchors } from 'react-scrollable-anchor'
 import { goToTop } from 'react-scrollable-anchor'
 import { goToAnchor } from 'react-scrollable-anchor'
+
+/* Material UI Button */
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+
+/* Icons */
+import CodeIcon from '@material-ui/icons/Code'
 
 
 class TitleBar extends React.Component {
@@ -121,19 +129,36 @@ class TitleBar extends React.Component {
         position: 'relative',
       },
 
+      Credit: {
+        position: "absolute",
+        left: "5%",
+        marginTop: 60,
+      },
 
+      CreditText: {
+        color: "white",
+        opacity: 0.7,
 
+      },
+
+      whiteBackground:{
+          backgroundColor: "white",
+      },
+
+      divStyle: {
+        marginTop: 55,
+        width: (this.state.width*0.8),
+      },
+
+      projectButtonIcon:{
+        marginLeft: 10,
+      },
     };
 
     const { scroll } = this.state;
 
-
-
     return(
       <div>
-
-
-
         <div style={styles.title}>
 
           <section>
@@ -146,10 +171,6 @@ class TitleBar extends React.Component {
               </Fade>
             </div>
           </section>
-
-
-
-
           <section>
             <div style = {styles.ContentDivStyle} id="experienceContainer">
               <Fade when={this.state.revealExperience} duration={2000}>
@@ -160,10 +181,6 @@ class TitleBar extends React.Component {
               </Fade>
             </div>
           </section>
-
-
-
-
           <section>
             <div style = {styles.ContentDivStyle} >
               <Fade when={this.state.revealProjects} duration={2000}>
@@ -173,7 +190,23 @@ class TitleBar extends React.Component {
             </div>
           </section>
 
+          <section>
+            <div style={styles.Credit}>
+              <Typography variant="subtitle1" style={styles.CreditText}>
+                Designed and Developed by Segal Au &copy; </Typography>
+              <Button variant="outlined"
+               color="secondary" target = "_blank" href="https://bitbucket.org/group-24/">
+                Source Code
+                <CodeIcon style={styles.projectButtonIcon}/>
+              </Button>
+            </div>
+          </section>
 
+          <Zoom duration={5000}>
+            <div style={styles.divStyle}>
+              <Divider style={styles.whiteBackground}/>
+            </div>
+          </Zoom>
 
 
 

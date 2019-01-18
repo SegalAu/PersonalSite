@@ -1,31 +1,38 @@
 import React, {Component} from 'react';
+
+/* Components */
 import FABNav from './FABNav';
 import Content from './Content';
 import About from './About';
-import LinkBar from './LinkBar';
-import {Scrollbars} from 'react-custom-scrollbars';
-import Fade from 'react-reveal/Fade';
-import Scrollbar from 'react-smooth-scrollbar';
-
 import BackToTop from './BackToTop';
+import LinkBar from './LinkBar';
 
+/* Effects */
+import Fade from 'react-reveal/Fade';
+
+/* Scroll Handling */
+import Scrollbar from 'react-smooth-scrollbar';
 import scrollToComponent from 'react-scroll-to-component';
-
 import Typography from '@material-ui/core/Typography';
 import { Scroller, scrollInitalState } from 'react-skroll'
+import {Scrollbars} from 'react-custom-scrollbars';
 
 /* Resources */
-import backgroundIMG from '../../resources/street.jpg';
 import backgroundIMG2 from '../../resources/backgroundImage2.jpg';
 import Cover from 'react-video-cover';
-import RainVid from '../../resources/rainBackground.mp4';
-
 
 /* Anchor Scroll */
 import ScrollableAnchor from 'react-scrollable-anchor'
 import { configureAnchors } from 'react-scrollable-anchor'
 import { goToTop } from 'react-scrollable-anchor'
 import { goToAnchor } from 'react-scrollable-anchor'
+
+/* CSS */
+import "./App.css"
+
+/* React Media Mobile */
+import MediaQuery from 'react-responsive';
+
 
 class App extends Component {
   constructor(props){
@@ -160,8 +167,7 @@ class App extends Component {
       outerContainer: {
       },
 
-      innerContainer: {
-      },
+
 
       FABNav: {
         position: 'fixed',
@@ -201,17 +207,29 @@ class App extends Component {
 
       backGroundContainer: {
         width: "100%",
-        height: 3500,
-        overflowX: "hidden",
-        overflowY: "visible",
-        marginLeft: 0,
-        paddingLeft: 0,
+        height: 4000,
+        overflowX: "auto",
+        overflowY: "auto",
         background: `url(${backgroundIMG2})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        filter: "blur(10px)",
+        WebkitBackgroundSize: "cover",
+        MozBackgroundSize: "cover",
+        OBackgroundSize: "cover",
       },
 
+      backGroundContainerDesktop : {
+        width: "100%",
+        height: 3700,
+        overflowX: "auto",
+        overflowY: "auto",
+        background: `url(${backgroundIMG2})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        WebkitBackgroundSize: "cover",
+        MozBackgroundSize: "cover",
+        OBackgroundSize: "cover",
+      },
 
     }
 
@@ -249,15 +267,9 @@ class App extends Component {
     const { scroll } = this.state;
 
     return(
-
-        <div >
-            <div style={styles.backGroundContainer}>
-
-            </div>
-
-            <div style = {styles.innerContainer}>
-
-
+        <div>
+          <MediaQuery query="(max-device-width: 1224px)">
+            <div style={styles.backGroundContainer} id="backgroundContainerMobile">
                 <div style={styles.Content}>
                   <Content goBackToTop={this.state.goBackToTop}
                            setToTopFalse={this.setToTopFalse}
@@ -269,25 +281,44 @@ class App extends Component {
                            setToProjectFalse = {this.setToProjectFalse}
                            onRef={ref => (this.content = ref)}/>
                 </div>
-
-
               <div style={styles.FABNav}>
                 <FABNav scrollToExperience={this.scrollToExperience}
                         setToTop={this.setToTop}
                         setToProject={this.setToProject}/>
               </div>
-
               <div style={btnStyle.BackToTop}>
                 <BackToTop setToTop={this.setToTop}/>
               </div>
+            </div>
+          </MediaQuery>
 
-
-
-
-          </div>
-
-
+          <MediaQuery query="(min-device-width: 1224px)">
+            <div style={styles.backGroundContainerDesktop} id="backGroundContainerDesktop">
+                <div style={styles.Content}>
+                  <Content goBackToTop={this.state.goBackToTop}
+                           setToTopFalse={this.setToTopFalse}
+                           goToExperience={this.state.goToExperience}
+                           setToExperienceFalse={this.setToExperienceFalse}
+                           goToProfile = {this.state.goToProfile}
+                           setToProfileFalse = {this.setToProfileFalse}
+                           goToProject = {this.state.goToProject}
+                           setToProjectFalse = {this.setToProjectFalse}
+                           onRef={ref => (this.content = ref)}/>
+                </div>
+                <div style={styles.FABNav}>
+                  <FABNav scrollToExperience={this.scrollToExperience}
+                          setToTop={this.setToTop}
+                          setToProject={this.setToProject}/>
+                </div>
+                <div style={btnStyle.BackToTop}>
+                  <BackToTop setToTop={this.setToTop}/>
+                </div>
+            </div>
+          </MediaQuery>
         </div>
+
+
+
 
     );
   }

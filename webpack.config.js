@@ -49,7 +49,11 @@ module.exports = {
        {
          test: /\.html$/,
          use: 'html-loader?attrs[]=video:src'
-       }
+       },
+       {
+          test:/\.css$/,
+          use:['style-loader','css-loader']
+       },
    ],
 
   },
