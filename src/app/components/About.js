@@ -45,7 +45,6 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import FolderIcon from '@material-ui/icons/FolderOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import AccountBoxIcon from '@material-ui/icons/faceOutlined';
 import CodeIcon from '@material-ui/icons/Code'
 
 /* Buttons */

@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import FABNav from './FABNav';
 import Content from './Content';
 import About from './About';
-import BackToTop from './BackToTop';
+import BackToTop from './backToTop';
 import LinkBar from './LinkBar';
 
 /* Effects */
