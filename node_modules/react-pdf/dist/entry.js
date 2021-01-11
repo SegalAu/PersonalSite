@@ -8,25 +8,25 @@ Object.defineProperty(exports, "__esModule", {
 Object.defineProperty(exports, "pdfjs", {
   enumerable: true,
   get: function get() {
-    return _pdfjsDist.default;
+    return _pdfjsDist["default"];
   }
 });
 Object.defineProperty(exports, "Document", {
   enumerable: true,
   get: function get() {
-    return _Document.default;
+    return _Document["default"];
   }
 });
 Object.defineProperty(exports, "Outline", {
   enumerable: true,
   get: function get() {
-    return _Outline.default;
+    return _Outline["default"];
   }
 });
 Object.defineProperty(exports, "Page", {
   enumerable: true,
   get: function get() {
-    return _Page.default;
+    return _Page["default"];
   }
 });
 
@@ -44,4 +44,4 @@ if (_utils.isLocalFileSystem) {
   (0, _utils.warnOnDev)('You are running React-PDF from your local file system. PDF.js Worker may fail to load due to browser\'s security policies. If you\'re on Google Chrome, you can use --allow-file-access-from-files flag for debugging purposes.');
 }
 
-_pdfjsDist.default.GlobalWorkerOptions.workerSrc = 'pdf.worker.js';
+_pdfjsDist["default"].GlobalWorkerOptions.workerSrc = 'pdf.worker.js';

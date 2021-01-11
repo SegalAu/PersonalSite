@@ -8,25 +8,25 @@ Object.defineProperty(exports, "__esModule", {
 Object.defineProperty(exports, "pdfjs", {
   enumerable: true,
   get: function get() {
-    return _pdfjsDist.default;
+    return _pdfjsDist["default"];
   }
 });
 Object.defineProperty(exports, "Document", {
   enumerable: true,
   get: function get() {
-    return _Document.default;
+    return _Document["default"];
   }
 });
 Object.defineProperty(exports, "Outline", {
   enumerable: true,
   get: function get() {
-    return _Outline.default;
+    return _Outline["default"];
   }
 });
 Object.defineProperty(exports, "Page", {
   enumerable: true,
   get: function get() {
-    return _Page.default;
+    return _Page["default"];
   }
 });
 
