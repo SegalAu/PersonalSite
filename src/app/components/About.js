@@ -10,7 +10,7 @@ import Typing from 'react-typing-animation';
 /* Button Linking */
 import { Link } from 'react-router-dom'
 /* Resume PDF */
-import resumePDF from '../../resources/Resume_SegalAu_Final.pdf';
+import resumePDF from '../../resources/Resume.pdf';
 /* React PDF */
 import { Document, Page } from 'react-pdf';
 /* React DOM */
@@ -531,8 +531,8 @@ class About extends React.Component {
                 <Typography variant="overline" style={stylesRender.whiteText}>
                   Resume
                   <IconButton
-                    href="./src/resources/Resume_SegalAu_Version_Final.pdf"
-                    target="_blank"
+                    href={resumePDF}
+                    target="_blank" 
                     aria-expanded={this.state.expanded}
                     aria-label="Show more"
                     style={stylesRender.buttonStyle}>
