@@ -305,7 +305,7 @@ class Experience extends React.Component {
                         Responsibilities & Achievements
                       </Typography>
 
-                      <Typography variant="subtitle3" style = {stylesRender.headerBar}>
+                      <Typography variant="subtitle2" style = {stylesRender.headerBar}>
                         <div style={stylesRender.experienceContentMobile}>
                           <ul>
                             <li>	Contributed in designing and implementing responsive web application tools platform for internal development and analyst team using React / Redux
