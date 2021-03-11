@@ -64,10 +64,8 @@ class TitleBar extends React.Component {
 
   componentDidUpdate(){
     if(this.props.goBackToTop){
-      console.log("Content sees BACK TO TOP");
     }
     if(this.props.goToProject){
-      console.log("content sees GO TO PROJECT");
     }
   }
 
@@ -80,17 +78,13 @@ class TitleBar extends React.Component {
   }
 
   handleScroll(){
-    console.log("running handle scroll");
     var y = window.scrollY;
-    console.log("y : " + y);
-    console.log("page y offset: " + window.pageYOffset);
     if(window.pageYOffset >= 1200 || y >= 1200){
       this.setState({
         revealProjects: true,
       });
     }
     if(window.pageYOffset >= 120 || y > 120){
-      console.log("setting experience to visible");
       this.setState({
         revealExperience: true,
       })

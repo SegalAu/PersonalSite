@@ -35,6 +35,9 @@ import { configureAnchors } from 'react-scrollable-anchor'
 import { goToTop } from 'react-scrollable-anchor'
 import { goToAnchor } from 'react-scrollable-anchor'
 
+/* React Media Mobile */
+import MediaQuery from 'react-responsive';
+
 
 const styles = theme => ({
   expand: {
@@ -145,7 +148,6 @@ class Experience extends React.Component {
       },
 
       titleTextBox: {
-
         width: this.state.width * 0.45,
         minWidth: 700,
         height: 600,
@@ -156,11 +158,35 @@ class Experience extends React.Component {
         paddingRight: 10,
       },
 
+      titleTextBoxMobile: {
+        width: document.documentElement.clientWidth * 0.95,
+        height: 600,
+        backgroundColor: "black",
+        opacity: 0.85,
+        paddingTop: 50,
+        paddingLeft: 10,
+        paddingRight: 10,
+      },
+
+      experienceContentMobile: {
+        width: document.documentElement.clientWidth *0.8
+      },
+
+      experienceContent: {
+        width: document.documentElement.clientWidth *0.8
+      },
+
       leftAlign: {
         height: 600,
         overflow: "hidden",
         width: this.state.width*0.8,
 
+      },
+
+      leftAlignMobile: {
+        height: 600,
+        overflow: "hidden",
+        width: this.state.width*0.9,
       },
 
       CardElementRightAlign: {
@@ -173,6 +199,12 @@ class Experience extends React.Component {
       },
 
       containerStyle: {
+        height: 600,
+        marginLeft: -20,
+      },
+
+      containerStyleMobile: {
+        width: document.documentElement.clientWidth,
         height: 600,
         marginLeft: -20,
       },
@@ -190,85 +222,185 @@ class Experience extends React.Component {
           backgroundColor: "white",
       },
 
+      whiteBackgroundMobile:{
+        backgroundColor: "white",
+        width: document.documentElement.clientWidth * 0.9
+      },
+
     }
 
     return(
       <div >
         <Fade>
 
+        <MediaQuery query="(max-device-width: 1020px)">
+          <Typography variant="h2" gutterBottom id="experience" style={stylesRender.experienceHeading}>
+            Experience
+          </Typography>
+        </MediaQuery>
 
-            <Typography variant="h1" gutterBottom id="experience" style={stylesRender.experienceHeading}>
-              Experience
-            </Typography>
+        <MediaQuery query="(min-device-width: 1021px)">
+          <Typography variant="h1" gutterBottom id="experience" style={stylesRender.experienceHeading}>
+            Experience
+          </Typography>
+        </MediaQuery>
 
-
+          
+        <MediaQuery query="(max-device-width: 1020px)">
+          <Zoom duration={5000}>
+            <div style={stylesRender.divStyle}>
+              <Divider style={stylesRender.whiteBackgroundMobile}/>
+            </div>
+          </Zoom>
+        </MediaQuery>
+        <MediaQuery query="(min-device-width: 1021px)">
           <Zoom duration={5000}>
             <div style={stylesRender.divStyle}>
               <Divider style={stylesRender.whiteBackground}/>
             </div>
           </Zoom>
+        </MediaQuery>
 
-          <div style={stylesRender.leftAlign}>
+          
 
+          
 
-            <Parallax
-               blur={0}
-               bgImage={officeIMG}
-               bgImageAlt="the cat"
-               strength={150}>
+               
+                    
 
-               <Container style={stylesRender.containerStyle} ref={this.experienceRef} >
-                <Row>
-                <Col xs={4} m={4}>
-                 <div style={stylesRender.titleBox}>
-                    <div style={stylesRender.titleTextBox}>
-                     <Typography gutterBottom variant="h4" component="h2"
-                                 style = {stylesRender.headerBar}>
-                       Agreement Express
-                     </Typography>
-                     <Typography gutterBottom variant="overline" component="h2"
-                                 style = {stylesRender.headerBar}>
-                       Software Developer (Co-op)
-                     </Typography>
-                     <Typography gutterBottom variant="subtitle1" component="h2"
-                                 style = {stylesRender.headerBar}>
-                       January - August 2018 (8 month)
-                     </Typography>
+                <MediaQuery query="(max-device-width: 1020px)">
+                  <div style={stylesRender.leftAlignMobile}>
 
 
+                  <Parallax
+                    blur={0}
+                    bgImage={officeIMG}
+                    bgImageAlt="the cat"
+                    strength={150}>
 
-                     <Typography gutterBottom variant="overline" component="h2"
-                                 style = {stylesRender.headerBar}>
-                       Responsibilities & Achievements
-                     </Typography>
+                    <Container style={stylesRender.containerStyleMobile} ref={this.experienceRef} >
+                    <Row>
+                    <Col xs={4} m={4}>
+                    <div style={stylesRender.titleBox}>
 
-                     <Typography variant="subtitle1" style = {stylesRender.headerBar}>
-                       <ul>
-                         <li>	Contributed in designing and implementing responsive web application tools platform for internal development and analyst team using React / Redux
-                         <br/> (enabled cross-platform compatibility and increased productivity by approximately 70%) </li>
-                         <li>	Collaborated and wrote software to exceed specific client requirements and establish data handling regulation </li>
-                         <li>	Conducted regular QA testing and bug-fixing using Jest / Mocha </li>
-                         <li>	Performed back-end integration and development using internal RESTful API (Java) </li>
-                         <li>	Enhanced front-end interaction and UI elements of internal development tools using React framework and third-party APIs such as Material UI </li>
-                         <li>	Worked with analysts in creating product demos to potential and existing clients </li>
-                       </ul>
-                     </Typography>
+                      <div style={stylesRender.titleTextBoxMobile}>
 
-
-                    </div>
-                  </div>
-                </Col>
-                <Col xs={6} m={6}>
-
-               </Col>
-               </Row>
-               </Container>
-
-             </Parallax>
+                      <Typography gutterBottom variant="h5" component="h2"
+                                  style = {stylesRender.headerBar}>
+                        Agreement Express
+                      </Typography>
+                      <Typography gutterBottom variant="overline" component="h2"
+                                  style = {stylesRender.headerBar}>
+                        Software Developer (Co-op)
+                      </Typography>
+                      <Typography gutterBottom variant="subtitle1" component="h2"
+                                  style = {stylesRender.headerBar}>
+                        January - August 2018 (8 month)
+                      </Typography>
 
 
 
-           </div>
+                      <Typography gutterBottom variant="overline" component="h2"
+                                  style = {stylesRender.headerBar}>
+                        Responsibilities & Achievements
+                      </Typography>
+
+                      <Typography variant="subtitle3" style = {stylesRender.headerBar}>
+                        <div style={stylesRender.experienceContentMobile}>
+                          <ul>
+                            <li>	Contributed in designing and implementing responsive web application tools platform for internal development and analyst team using React / Redux
+                            <br/> (enabled cross-platform compatibility and increased productivity by approximately 70%) </li>
+                            <li>	Collaborated and wrote software to exceed specific client requirements and establish data handling regulation </li>
+                            <li>	Conducted regular QA testing and bug-fixing using Jest / Mocha </li>
+                            <li>	Performed back-end integration and development using internal RESTful API (Java) </li>
+                            <li>	Enhanced front-end interaction and UI elements of internal development tools using React framework and third-party APIs such as Material UI </li>
+                          </ul>
+                        </div>
+                        
+                      </Typography>
+                      </div>
+
+                      </div>
+                      </Col>
+                      <Col xs={6} m={6}>
+                      </Col>
+                      </Row>
+                      </Container>
+
+                      </Parallax>
+
+
+
+                        </div>
+                  </MediaQuery>
+
+                  <MediaQuery query="(min-device-width: 1021px)">
+                    <div style={stylesRender.leftAlign}>
+
+
+                      <Parallax
+                        blur={0}
+                        bgImage={officeIMG}
+                        bgImageAlt="the cat"
+                        strength={150}>
+                      <Container style={stylesRender.containerStyle} ref={this.experienceRef} >
+                      <Row>
+                      <Col xs={4} m={4}>
+                      <div style={stylesRender.titleBox}>
+
+
+                      <div style={stylesRender.titleTextBox}>
+                      <Typography gutterBottom variant="h4" component="h2"
+                                  style = {stylesRender.headerBar}>
+                        Agreement Express
+                      </Typography>
+                      <Typography gutterBottom variant="overline" component="h2"
+                                  style = {stylesRender.headerBar}>
+                        Software Developer (Co-op)
+                      </Typography>
+                      <Typography gutterBottom variant="subtitle1" component="h2"
+                                  style = {stylesRender.headerBar}>
+                        January - August 2018 (8 month)
+                      </Typography>
+
+
+
+                      <Typography gutterBottom variant="overline" component="h2"
+                                  style = {stylesRender.headerBar}>
+                        Responsibilities & Achievements
+                      </Typography>
+
+                      <Typography variant="subtitle1" style = {stylesRender.headerBar}>
+                        <ul>
+                          <li>	Contributed in designing and implementing responsive web application tools platform for internal development and analyst team using React / Redux
+                          <br/> (enabled cross-platform compatibility and increased productivity by approximately 70%) </li>
+                          <li>	Collaborated and wrote software to exceed specific client requirements and establish data handling regulation </li>
+                          <li>	Conducted regular QA testing and bug-fixing using Jest / Mocha </li>
+                          <li>	Performed back-end integration and development using internal RESTful API (Java) </li>
+                          <li>	Enhanced front-end interaction and UI elements of internal development tools using React framework and third-party APIs such as Material UI </li>
+                          <li>	Worked with analysts in creating product demos to potential and existing clients </li>
+                        </ul>
+                      </Typography>
+                      </div>
+
+                      </div>
+                        </Col>
+                        <Col xs={6} m={6}>
+                        </Col>
+                        </Row>
+                        </Container>
+
+                        </Parallax>
+
+
+
+                          </div>    
+                    </MediaQuery>
+
+                    
+                 
+
+            
 
 
 

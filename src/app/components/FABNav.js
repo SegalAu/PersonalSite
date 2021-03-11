@@ -125,18 +125,15 @@ class FABNav extends React.Component {
   }
 
   testScroll(){
-    console.log(window.pageYOffset);
   }
 
   goToProfile(){
-    console.log("reached going to profile!");
     this.setState({
       profile: true,
     })
   }
 
   goToExperience(){
-    console.log("going to experience!");
     this.setState({
       experience: true,
     })
