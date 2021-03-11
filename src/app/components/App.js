@@ -69,7 +69,6 @@ class App extends Component {
       myChildRefs: childRefs,
     });
 
-    console.log("CHILD REFS: " + this.state.myChildRefs);
   }
 
   componentWillMount(){
@@ -109,28 +108,24 @@ class App extends Component {
   }
 
   setToTop(){
-    console.log("APP SEES BACK TO TOP");
     this.setState({
       goBackToTop: true,
     });
   }
 
   setToTopFalse(){
-    console.log("RUNNING SET TO TOP FALSE");
     this.setState({
       goBackToTop: false,
     });
   }
 
   scrollToExperience(){
-    console.log("setting to experience");
     this.setState({
       goToExperience: true,
     });
   }
 
   setToExperienceFalse(){
-    console.log("setting to experience false");
     this.setState({
       goToExperience: false,
     });
@@ -149,7 +144,6 @@ class App extends Component {
   }
 
   setToProject(){
-    console.log("set to project ran!");
     this.setState({
       goToProject: true,
     });
@@ -176,12 +170,25 @@ class App extends Component {
         zIndex: 5,
       },
       Content: {
+        overflow: "hidden",
         position: 'absolute',
         display: 'flex',
         alignItems: 'center',
-        top: this.state.height * 0.1,
-        left: this.state.width * 0.1,
+        paddingTop: this.state.height * 0.1,
+        paddingLeft: this.state.width * 0.1,
         marginRight: this.state.width * 0.1,
+        zIndex: 5,
+      },
+
+      ContentMobile: {
+        overflow: "hidden",
+        position: 'absolute',
+        maxWidth: '95%',
+        display: 'flex',
+        alignItems: 'center',
+        paddingTop: this.state.height * 0.05,
+        paddingLeft: this.state.width * 0.03,
+        // marginRight: this.state.width * 0.1,
         zIndex: 5,
       },
 
@@ -205,11 +212,10 @@ class App extends Component {
         padding: 0,
       },
 
-      backGroundContainer: {
+      backGroundContainerTiny: {
         width: "100%",
-        height: 4000,
-        overflowX: "auto",
-        overflowY: "auto",
+        height: 4800,
+        overflowX: "hidden",
         background: `url(${backgroundIMG2})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -218,11 +224,35 @@ class App extends Component {
         OBackgroundSize: "cover",
       },
 
+      backGroundContainer: {
+        width: "100%",
+        height: 4500,
+        overflow: "hidden",
+        background: `url(${backgroundIMG2})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        WebkitBackgroundSize: "cover",
+        MozBackgroundSize: "cover",
+        OBackgroundSize: "cover",
+      },
+
+      backGroundContainerPad: {
+        width: "100%",
+        height: 3800,
+        overflow: "hidden",
+        background: `url(${backgroundIMG2})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        WebkitBackgroundSize: "cover",
+        MozBackgroundSize: "cover",
+        OBackgroundSize: "cover",
+      },
+
+
       backGroundContainerDesktop : {
         width: "100%",
         height: 3700,
-        overflowX: "auto",
-        overflowY: "auto",
+        overflow: "hidden",
         background: `url(${backgroundIMG2})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -268,9 +298,34 @@ class App extends Component {
 
     return(
         <div>
-          <MediaQuery query="(max-device-width: 1224px)">
+          <MediaQuery query="(max-device-width: 350px)">
+            <div style={styles.backGroundContainerTiny} id="backgroundContainerMobile">
+                  <div style={styles.ContentMobile}>
+                    <Content goBackToTop={this.state.goBackToTop}
+                            setToTopFalse={this.setToTopFalse}
+                            goToExperience={this.state.goToExperience}
+                            setToExperienceFalse={this.setToExperienceFalse}
+                            goToProfile = {this.state.goToProfile}
+                            setToProfileFalse = {this.setToProfileFalse}
+                            goToProject = {this.state.goToProject}
+                            setToProjectFalse = {this.setToProjectFalse}
+                            onRef={ref => (this.content = ref)}/>
+                  </div>
+                {/* <div style={styles.FABNav}>
+                  <FABNav scrollToExperience={this.scrollToExperience}
+                          setToTop={this.setToTop}
+                          setToProject={this.setToProject}/>
+                </div> */}
+                {/* <div style={btnStyle.BackToTop}>
+                  <BackToTop setToTop={this.setToTop}/>
+                </div> */}
+              </div>
+
+          </MediaQuery>
+
+          <MediaQuery query="(min-device-width: 351px) and (max-device-width: 700px)">
             <div style={styles.backGroundContainer} id="backgroundContainerMobile">
-                <div style={styles.Content}>
+                <div style={styles.ContentMobile}>
                   <Content goBackToTop={this.state.goBackToTop}
                            setToTopFalse={this.setToTopFalse}
                            goToExperience={this.state.goToExperience}
@@ -281,18 +336,44 @@ class App extends Component {
                            setToProjectFalse = {this.setToProjectFalse}
                            onRef={ref => (this.content = ref)}/>
                 </div>
-              <div style={styles.FABNav}>
+              {/* <div style={styles.FABNav}>
                 <FABNav scrollToExperience={this.scrollToExperience}
                         setToTop={this.setToTop}
                         setToProject={this.setToProject}/>
-              </div>
-              <div style={btnStyle.BackToTop}>
+              </div> */}
+              {/* <div style={btnStyle.BackToTop}>
                 <BackToTop setToTop={this.setToTop}/>
-              </div>
+              </div> */}
             </div>
           </MediaQuery>
 
-          <MediaQuery query="(min-device-width: 1224px)">
+          <MediaQuery query="(min-device-width: 701px) and (max-device-width: 1000px)">
+            <div style={styles.backGroundContainerPad} id="backgroundContainerMobile">
+                <div style={styles.ContentMobile}>
+                  <Content goBackToTop={this.state.goBackToTop}
+                           setToTopFalse={this.setToTopFalse}
+                           goToExperience={this.state.goToExperience}
+                           setToExperienceFalse={this.setToExperienceFalse}
+                           goToProfile = {this.state.goToProfile}
+                           setToProfileFalse = {this.setToProfileFalse}
+                           goToProject = {this.state.goToProject}
+                           setToProjectFalse = {this.setToProjectFalse}
+                           onRef={ref => (this.content = ref)}/>
+                </div>
+              {/* <div style={styles.FABNav}>
+                <FABNav scrollToExperience={this.scrollToExperience}
+                        setToTop={this.setToTop}
+                        setToProject={this.setToProject}/>
+              </div> */}
+              {/* <div style={btnStyle.BackToTop}>
+                <BackToTop setToTop={this.setToTop}/>
+              </div> */}
+            </div>
+          </MediaQuery>
+
+
+
+          <MediaQuery query="(min-device-width: 1001px)">
             <div style={styles.backGroundContainerDesktop} id="backGroundContainerDesktop">
                 <div style={styles.Content}>
                   <Content goBackToTop={this.state.goBackToTop}

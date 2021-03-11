@@ -81,6 +81,9 @@ import { configureAnchors } from 'react-scrollable-anchor'
 import { goToTop } from 'react-scrollable-anchor'
 import { goToAnchor } from 'react-scrollable-anchor'
 
+/* React Media Mobile */
+import MediaQuery from 'react-responsive';
+import { auto } from 'html-webpack-plugin/lib/chunksorter';
 
 var aboutText = "An energetic and focused individual with a drive for the betterment of people and technology. " +
 "Often found snowboarding in the wild or improving his mediocre skills in Super Smash Bros, this unique Homo Sapien has limited " +
@@ -94,8 +97,15 @@ const images = [
 const ContainerCar = styled.div`
   position: relative;
   overflow: hidden;
-  width: 300px;
-  height: 400px;
+  width: "25%";
+  height: "25%";
+`;
+
+const ContainerCarMobile = styled.div`
+  position: relative;
+  overflow: hidden;
+  width: 150px;
+  height: 700px;
 `;
 
 const theme = createMuiTheme({
@@ -228,7 +238,6 @@ class About extends React.Component {
 
   componentDidUpdate(){
     if(this.props.goBackToTop){
-      console.log("About sees GO BACK TO TOP");
       this.props.setToTopFalse();
       this.ScrollToTop();
     }
@@ -256,7 +265,6 @@ class About extends React.Component {
   }
 
   handleScroll(){
-    console.log("running handle scroll");
     var y = window.scrollY;
     if(y>0){
       this.setState({
@@ -328,6 +336,11 @@ class About extends React.Component {
           backgroundColor: "white",
       },
 
+      whiteBackgroundMobile:{
+        backgroundColor: "white",
+        width: document.documentElement.clientWidth * 0.9
+      },
+
       carousel: {
         marginLeft: 0,
         width: 300,
@@ -360,6 +373,7 @@ class About extends React.Component {
         boxShadow: 'none',
         overflow: "hidden",
         maxHeight: 300,
+        maxWidth: document.documentElement.clientWidth * 0.9
       },
 
       cardStyle2:{
@@ -372,7 +386,8 @@ class About extends React.Component {
       },
 
       collapseCardStyle:{
-        width: this.state.width*0.4,
+        // width: this.state.width*0.4,
+        maxWidth: document.documentElement.clientWidth * 0.9,
         height: "auto",
         marginLeft: 20,
       },
@@ -411,6 +426,11 @@ class About extends React.Component {
         marginTop: 350,
       },
 
+      scrollForMoreDivMobile: {
+        marginLeft: document.documentElement.clientWidth*0.33,
+        marginTop: 350
+      },
+
       profileContainer: {
         marginTop: 0,
         overflow: "hidden",
@@ -434,7 +454,6 @@ class About extends React.Component {
     let opacityScrollMore = (1-(window.scrollY/100));
 
     if(this.state.displayScrollMore){
-      console.log("DISPLAY SCROLL MORE");
       scrollMoreBtnStyle={
         btnStyle: {
           color: "white",
@@ -452,6 +471,7 @@ class About extends React.Component {
     }
 
     let textLoopDisplay;
+    let textLoopDisplayMobile;
     navigator.sayswho= (function(){
       var ua= navigator.userAgent, tem,
       M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
@@ -469,12 +489,32 @@ class About extends React.Component {
     })();
 
     if(navigator.sayswho.toString().includes("Edge")){
-      console.log("THIS SHIT IS EDGE");
     } else {
-      console.log("NOT EDGE");
       textLoopDisplay = (
         <Fade bottom duration={1500}>
           <Typography variant="h2" gutterBottom style={stylesRender.whiteText}>
+          <TextLoop
+              interval={2000}
+              springConfig={{ stiffness: 190, damping: 14 }}>
+
+              <span>Software Developer </span>
+
+              <span>Recovering Coffee Addict </span>
+
+              <span>Mediocre Gamer </span>
+
+              <span>Snowboarding Fanatic </span>
+
+              <span>Master Chef </span>
+
+          </TextLoop>
+        </Typography>
+      </Fade>
+      );
+
+      textLoopDisplayMobile = (
+        <Fade bottom duration={1500}>
+          <Typography variant="h5" gutterBottom style={stylesRender.whiteText}>
           <TextLoop
               interval={2000}
               springConfig={{ stiffness: 190, damping: 14 }}>
@@ -505,21 +545,36 @@ class About extends React.Component {
                    this.top = section;
                  }}
                  id="about">
-          <Typography component="h2" variant="h1" gutterBottom style={stylesRender.whiteText}>
-            Segal Au
-          </Typography>
+          
+          <MediaQuery query="(max-device-width: 1020px)">
+            <Typography component="h2" variant="h2" gutterBottom style={stylesRender.whiteText}>
+              Segal Au
+            </Typography>
+          </MediaQuery>
+
+          <MediaQuery query="(min-device-width: 1021px)">
+            <Typography component="h2" variant="h1" gutterBottom style={stylesRender.whiteText}>
+              Segal Au
+            </Typography>
+          </MediaQuery>          
         </section>
 
         </Fade>
 
-        {textLoopDisplay}
+        <MediaQuery query="(max-device-width: 1020px)">
+          {textLoopDisplayMobile}
+          <Zoom duration={5001}>
+            <Divider style={stylesRender.whiteBackgroundMobile}/>
+          </Zoom> 
+        </MediaQuery>
+        <MediaQuery query="(min-device-width: 1021px)">
+          {textLoopDisplay}
+          <Zoom duration={5000}>
+            <Divider style={stylesRender.whiteBackground}/>
+          </Zoom>
+        </MediaQuery>
 
-
-
-
-        <Zoom duration={5000}>
-          <Divider style={stylesRender.whiteBackground}/>
-        </Zoom>
+        
 
         <Fade duration={3000}>
 
@@ -563,7 +618,7 @@ class About extends React.Component {
                   <Card style={stylesRender.collapseCardStyle}
                         className={classes.card}>
                     <div style={stylesRender.collapseDetails}>
-                      <CardContent className={classes.content}>
+                      <CardContent style={styles.cardStyle} className={classes.content}>
                         <Typography className={classes.aboutHeader1} color="white">
                           Hello, World.
                         </Typography>
@@ -649,19 +704,6 @@ class About extends React.Component {
                         <Typography variant="button" style={stylesRender.whiteTextPadded}>
                           LINKEDIN </Typography>
                       </Button>
-                      <Button>
-                        <Typography variant="button" style={stylesRender.whiteTextPadded}>
-                          au.segal@gmail.com  |  778-302-6170 </Typography>
-                      </Button>
-
-                      <Button variant="outlined"
-                              color="primary"
-                              href="index2.html"
-                              target="_blank"
-                              className={classes.bitButton}>
-                        <Typography variant="button" style={stylesRender.whiteTextPadded} >
-                          COURSES </Typography>
-                      </Button>
 
 
 
@@ -672,15 +714,31 @@ class About extends React.Component {
                 </Collapse>
               </Card>
 
-              <div style={stylesRender.scrollForMoreDiv}>
-               <Fade duration={8000}>
-                <Typography variant="overline" style={scrollMoreBtnStyle.btnStyle}>
-                  Scroll For More
-                </Typography>
+              <MediaQuery query="(max-device-width: 1020px)">
+                <div style={stylesRender.scrollForMoreDivMobile}>
+                <Fade duration={8000}>
+                  <Typography variant="overline" style={scrollMoreBtnStyle.btnStyle}>
+                    Scroll For More
+                  </Typography>
 
-               </Fade>
+                </Fade>
 
-              </div>
+                </div>
+              </MediaQuery>
+
+              <MediaQuery query="(min-device-width: 1021px)">
+                <div style={stylesRender.scrollForMoreDiv}>
+                <Fade duration={8000}>
+                  <Typography variant="overline" style={scrollMoreBtnStyle.btnStyle}>
+                    Scroll For More
+                  </Typography>
+
+                </Fade>
+
+                </div>
+              </MediaQuery>
+              
+              
 
           </div>
         </Fade>
