@@ -83,7 +83,6 @@ import { goToAnchor } from 'react-scrollable-anchor'
 
 /* React Media Mobile */
 import MediaQuery from 'react-responsive';
-import { auto } from 'html-webpack-plugin/lib/chunksorter';
 
 var aboutText = "An energetic and focused individual with a drive for the betterment of people and technology. " +
 "Often found snowboarding in the wild or improving his mediocre skills in Super Smash Bros, this unique Homo Sapien has limited " +
